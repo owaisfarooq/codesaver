@@ -1,7 +1,7 @@
 [{
     "id": 1,
     "title": "c++ add sub",
-    "code": "An apple mobile which is nothing like apple",
+    "code": "using namespace std;class Student {public:string name;int roll_no;};int main (void){Student a;a.name = \"john\";a.roll_no = 2;cout << \"name: \" << a.name << \" roll number: \" << a.roll_no;return 0;}",
     "price": 549,
     "discountPercentage": 12.96,
     "rating": 4.69,

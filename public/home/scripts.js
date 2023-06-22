@@ -7,10 +7,10 @@ const auth = params.get('auth');
 
 if (auth == 'true') {
 
-  document.getElementById("nav").innerHTML +=`
+  document.getElementById("nav").innerHTML += `
   <div class="container-fluid">
     <a class="navbar-brand" id="mainLink" href="/?auth=true">CodeSaver</a>
-    <div class="collapse navbar-collapse" style="margin-left: auto;" id="navbarNav">
+    <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
           <a class="navbar-brand" id="total-items">Total Items: </a>
           <li class="nav-item" style="margin-left: auto;">
@@ -25,20 +25,20 @@ if (auth == 'true') {
   `;
 
 } else {
- 
-  document.getElementById("nav").innerHTML +=`
+
+  document.getElementById("nav").innerHTML += `
   <div class="container-fluid">
     <a class="navbar-brand" id="mainLink" href="/">CodeSaver</a>
-    <div class="collapse navbar-collapse" style="margin-left: auto;" id="navbarNav">
-      <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
-        <a class="navbar-brand" id="total-items">Total Items: </a>
-        <li class="nav-item" style="margin-left: auto;">
-          <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
-        </li>
-        <li class="nav-item" style="margin-left: auto;">
-          <a href="/login/?oldPage=${currentUrl}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">login</a>
-        </li>
-      </ul>
+    <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
+        <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
+          <a class="navbar-brand" id="total-items">Total Items: </a>
+          <li class="nav-item" style="margin-left: auto;">
+            <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
+          </li>
+          <li class="nav-item" style="margin-left: auto;">
+            <a href="/login/?oldPage=${currentUrl}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">login</a>
+          </li>
+        </ul>
     </div>
   </div>
   `;

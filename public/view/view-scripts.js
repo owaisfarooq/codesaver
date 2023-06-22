@@ -1,19 +1,14 @@
-let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : 'https://' + window.location.hostname + '/';
-// textArea = document.getElementById('code');
-// textArea.addEventListener('input', function (evt) {
-//   this.style.height = 'auto';
-//   this.style.height = this.scrollHeight + 'px';
-//   console.log('scroll height: ' + this.scrollHeight + 'px');
-// });
+let url = 'https://codesaver.owaisfarooq.repl.co/';
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id');
 let type = params.get('type');
 let auth = params.get('auth');
+const currentUrl = window.location.href;
 var data;
 let navbarNav = document.getElementById("navbarNav");
 if (auth == 'true') {
-  nav.innerHTML += 
-  `
+  nav.innerHTML +=
+    `
   <div class="container-fluid">
     <a class="navbar-brand" href="/?auth=true">CodeSaver</a>
       <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
@@ -31,19 +26,16 @@ if (auth == 'true') {
   `;
 } else {
   nav.innerHTML +=
-  `
+    `
     <div class="container-fluid">
       <a class="navbar-brand" href="/">CodeSaver</a>
       <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="nav-items" style="margin-left: auto;">
           <li class="nav-item" style="margin-left: auto;">
-            <li class="nav-item" style="margin-left: auto;">
-              <a href="/login" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Login</a>
-            </li>
-            <li class="nav-item" style="margin-left: auto;">
-              <a href="/lab-activities" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
-            </li>
-            <a href="/new" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
+            <a href="/login/?oldPage=${currentUrl}&type=${type}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Login</a>
+          </li>
+          <li class="nav-item" style="margin-left: auto;">
+            <a href="/lab-activities" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
           </li>
         </ul>
       </div>
@@ -113,58 +105,79 @@ function openToast(message, id, color) {
 }
 
 function makeCard() {
-  var card = document.getElementById("card");
   if (type == "codes") {
-    var head = `
-      <div class="card-header d-flex justify-content-between">
-        <div class="align-left">
-                
-          <label class="form-label">Title: </label>
-          <input class="form-control" id="Title" disabled value ="${data.title}">
-        
-        </div>
-        <div class="align-right ">
+    var mainBody = document.getElementById("main-body");
+    var card = `
+        <div>
+          <div class="card" id="card">
+            <div class="card-header d-flex justify-content-between">
+              <div class="align-left">
+                      
+                <label class="form-label">Title: </label>
+                <input class="form-control" id="Title" disabled value="${data.title}">
+              
+              </div>
+              <div class="align-right ">
+                  
+                <label class="form-label">Author: </label>
+                <input class="form-control" id="Author" disabled value="${data.author}">
+                  
+              </div>
+            </div>
             
-          <label class="form-label">Author: </label>
-          <input class="form-control" id="Author" disabled value="${data.author}">
-            
+            <div class="card-body">
+              <textarea id="code" disabled class="card-text code-text">${data.code}</textarea>
+              <div class="align-right">
+                <a class="btn btn-primary" onclick="copyToClipboard()">Copy</a>
+              </div>            
+            </div>
+          </div>
         </div>
-      </div>
-    `;
-    document.getElementById("code").innerHTML = data.code;
-    card.innerHTML = head + card.innerHTML;
+      `;
+
+    mainBody.innerHTML += card;
     var e = document.getElementById("Language");
     e.value = data.language;
 
   }
   else if (type == "activities") {
-    
-    var head = `
-        <div class="card-header d-flex justify-content-between">
-          <div class="align-left">
+    var mainBody = document.getElementById("main-body");
+    var card = `
+          <div>
+            <div class="card" id="card">
+              <div class="card-header d-flex justify-content-between">
+                <div class="align-left">
 
-            <label class="form-label">chapter: </label>
-            <input class="form-control" id="Chapter" disabled value="${data.chapter}">
+                  <label class="form-label">chapter: </label>
+                  <input class="form-control" id="Chapter" disabled value="${data.chapter}">
 
+                </div>
+
+                <div class="align-left">
+
+                  <label class="form-label">activity: </label>
+                  <input class="form-control" id="ActivityNo" disabled value="${data.activityNo}">
+
+                </div>
+
+                <div class="align-right ">
+
+                  <label class="form-label">Author: </label>
+                  <input class="form-control" disabled id="Author" value="${data.author}">
+
+                </div>
+              </div>
+
+              <div class="card-body">
+                <textarea id="code" disabled class="card-text code-text">${data.code}</textarea>
+                <div class="align-right">
+                  <a class="btn btn-primary" onclick="copyToClipboard()">Copy</a>
+                </div>            
+              </div>
+            </div>
           </div>
-
-          <div class="align-left">
-
-            <label class="form-label">activity: </label>
-            <input class="form-control" id="ActivityNo" disabled value="${data.activityNo}">
-
-          </div>
-
-          <div class="align-right ">
-
-            <label class="form-label">Author: </label>
-            <input class="form-control" disabled id="Author" value="${data.author}">
-
-          </div>
-        </div>
       `;
-      document.getElementById("code").innerHTML = data.code;
-      card.innerHTML = head + card.innerHTML;
-    
+
+    mainBody.innerHTML += card;
   }
-}
+}        

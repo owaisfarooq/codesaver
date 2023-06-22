@@ -1,4 +1,4 @@
-let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : 'https://' + window.location.hostname + '/';
+let url = 'https://codesaver.owaisfarooq.repl.co/';
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id');
 let auth = params.get('auth');

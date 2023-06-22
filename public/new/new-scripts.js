@@ -5,16 +5,16 @@ let id = params.get('id');
 let type = params.get('type');
 setTimeout(makeCard, 1);
 
-document.addEventListener("keydown", function (e) {
-    if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-        saveCard();
-    }
+document.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && e.key === 's') {
+    e.preventDefault();
+    saveCard();
+  }
 }, false);
 let nav = document.getElementById("nav");
 if (auth == 'true') {
-  nav.innerHTML += 
-  `
+  nav.innerHTML +=
+    `
     <div class="container-fluid">
     <a class="navbar-brand" href="/">CodeSaver</a>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -42,96 +42,96 @@ if (auth == 'true') {
 }
 function saveCard() {
 
-    if (type == 'codes') {
-        const titleToSend = document.getElementById('Title').value;
-        const authorToSend = document.getElementById('Author').value;
-        const languageToSend = document.getElementById('Language').value;
-        const codeToSend = document.getElementById('code').value;
-    
-        fetch(url + 'save/?new=true&type=codes', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({
-                title: titleToSend,
-                author: authorToSend,
-                language: languageToSend,
-                code: codeToSend
-            })
+  if (type == 'codes') {
+    const titleToSend = document.getElementById('Title').value;
+    const authorToSend = document.getElementById('Author').value;
+    const languageToSend = document.getElementById('Language').value;
+    const codeToSend = document.getElementById('code').value;
+
+    fetch(url + 'save/?new=true&type=codes', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({
+        title: titleToSend,
+        author: authorToSend,
+        language: languageToSend,
+        code: codeToSend
+      })
+    })
+      .then(response => {
+        if (response.status == 200) {
+          console.log(response);
+          openToast("Saved card ", "#198754");
+          setTimeout(() => {
+            window.location.replace("/");
+          }, 1000);
+        }
+      })
+      .catch(function(err) {
+        openToast("Failed to save card ", "#dc3545");
+        console.log(err);
+      });
+  } else if (type == 'activities') {
+    const chapterToSend = document.getElementById('Chapter').value;
+    const activityNoToSend = document.getElementById('ActivityNo').value;
+    const authorToSend = document.getElementById('Author').value;
+    const codeToSend = document.getElementById('code').value;
+    fetch(url + 'save/?new=true&type=activities',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({
+          chapter: Number(chapterToSend),
+          activityNo: Number(activityNoToSend),
+          author: authorToSend,
+          code: codeToSend
         })
-        .then(response => {
-            if (response.status == 200) {
-                console.log(response);
-                openToast("Saved card ", "#198754");
-                setTimeout(() => {
-                    window.location.replace("/");
-                }, 1000);
-            }
-        })
-        .catch(function (err) {
-            openToast("Failed to save card ", "#dc3545");
-            console.log(err);
-        });
-    } else if (type == 'activities') {
-        const chapterToSend = document.getElementById('Chapter').value;
-        const activityNoToSend = document.getElementById('ActivityNo').value;
-        const authorToSend = document.getElementById('Author').value;
-        const codeToSend = document.getElementById('code').value;
-        fetch(url + 'save/?new=true&type=activities',
-            {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({
-                chapter: Number(chapterToSend),
-                activityNo: Number(activityNoToSend),
-                author: authorToSend,
-                code: codeToSend
-            })
-            }
-        )
-        .then(() => {
-            openToast("Saved card ", "#198754");
-        });
-    }
-    document.getElementById("saveBtn").disabled = true;
+      }
+    )
+      .then(() => {
+        openToast("Saved card ", "#198754");
+      });
+  }
+  document.getElementById("saveBtn").disabled = true;
 }
 
 function openToast(message, color) {
-    if (type == 'activities') {
-        const cardHeading = document.getElementById('Chapter').value;
-        const subHeading = document.getElementById('cardHeading');
-        const bodyOfToast = document.getElementById('toast-body');
-        const header = document.getElementById('header');
-        header.style.backgroundColor = color;
-        bodyOfToast.innerHTML = message;
-        subHeading.innerHTML = cardHeading;
-        const toastLiveExample = document.getElementById('liveToast');
-        const toast = new bootstrap.Toast(toastLiveExample);
-        toast.show();
-    
-    }else if (type == 'codes') {
-        const cardHeading = document.getElementById('Title').value;
-        const subHeading = document.getElementById('cardHeading');
-        const bodyOfToast = document.getElementById('toast-body');
-        const header = document.getElementById('header');
-        header.style.backgroundColor = color;
-        bodyOfToast.innerHTML = message;
-        subHeading.innerHTML = cardHeading;
-        const toastLiveExample = document.getElementById('liveToast');
-        const toast = new bootstrap.Toast(toastLiveExample);
-        toast.show();
-    }
+  if (type == 'activities') {
+    const cardHeading = document.getElementById('Chapter').value;
+    const subHeading = document.getElementById('cardHeading');
+    const bodyOfToast = document.getElementById('toast-body');
+    const header = document.getElementById('header');
+    header.style.backgroundColor = color;
+    bodyOfToast.innerHTML = message;
+    subHeading.innerHTML = cardHeading;
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+
+  } else if (type == 'codes') {
+    const cardHeading = document.getElementById('Title').value;
+    const subHeading = document.getElementById('cardHeading');
+    const bodyOfToast = document.getElementById('toast-body');
+    const header = document.getElementById('header');
+    header.style.backgroundColor = color;
+    bodyOfToast.innerHTML = message;
+    subHeading.innerHTML = cardHeading;
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+  }
 }
 
 function makeCard() {
-    var mainBody = document.getElementById("bodyTo");
-    if(type == 'codes'){
-        var card = `
+  var mainBody = document.getElementById("bodyTo");
+  if (type == 'codes') {
+    var card = `
             <div>
                 <div class="card" id="card">
                     <div class="card-header d-flex justify-content-between">
@@ -163,8 +163,8 @@ function makeCard() {
                 </div>
             </div>
         `;
-    } else if(type == 'activities'){
-        var card = `
+  } else if (type == 'activities') {
+    var card = `
             <div>
                 <div class="card" id="card">
                     <div class="card-header d-flex justify-content-between">
@@ -192,7 +192,7 @@ function makeCard() {
                 </div>
             </div>
         `;
-    }
+  }
 
-    mainBody.innerHTML += card;
+  mainBody.innerHTML += card;
 }

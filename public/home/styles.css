@@ -48,7 +48,7 @@ body {
 
 .carousel-item {
     height: 400px;
-    background-color: blueviolet;
+/*     background-color: blueviolet; */
     color: #f3f3f3;
 }
 
@@ -118,4 +118,4 @@ body {
     #nav{
         display: flex;
     }
-}   
+}

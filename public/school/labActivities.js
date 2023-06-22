@@ -135,6 +135,7 @@ function openToast(message, id) {
 function populateHeader() {
   var smallHeader = document.getElementById('total-items');
   var noOfCards = data.length;
+  console.log(data.length);
   smallHeader.innerHTML += noOfCards;
 
 }
@@ -152,16 +153,14 @@ function makeCards() {
   const mainBody = document.getElementById("main-body");
 
   rowCount = 0;
+  populateHeader();
   if (filter) {
     filterByChapter(filter);
-    populateHeader();
   }
   if (data.length == 0) {
     document.getElementById('main-body').innerHTML +=
       `
-      <h1 class="">No programs of chapter ${filter} uploaded yet.</h1>
-      <br/>
-      <h1 class="">sowwy :')</h1>
+      <h1 class="">stop messing with the links 🔪</h1>
     `
   }
   // if (sortBy) {

@@ -1,4 +1,5 @@
 const express = require('express');
+const flatted = require('flatted');
 const fs = require('fs');
 const app = express();
 var cors = require('cors');
@@ -405,10 +406,29 @@ let allowedUrls = [
   '/codes/',
   '/activities/'
 ]
-
+function log ( req ) {
+  fs.readFile(__dirname + '/api/logs.json', 'utf8', function readFileCallback(err, data) {
+    if (err) {
+      reject(Error("error : " + err));
+    } else {
+      obj = JSON.parse(data);
+      const flattenedReq = flatted.stringify(req);
+      obj.push(flattenedReq)
+      json = JSON.stringify(obj);
+      fs.writeFile(__dirname + '/api/logs.json', json, 'utf8', err => {
+        if (err) {
+          reject(Error("error: " + err));
+          return console.log(err);
+        }
+      });
+    }
+  })
+}
 app.use( async function ( req, res, next ) {
+  
+  log(req)
   if( allowedUrls.find ( x => x.toLocaleLowerCase() == req.path.toLocaleLowerCase() ) && req.method.toLowerCase() == 'GET'.toLowerCase() ) {
-    next();
+      next();
     return;
   }
   if ( req.method.toLowerCase() == 'GET'.toLowerCase() ) {

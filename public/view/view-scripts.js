@@ -1,23 +1,30 @@
-let url = 'https://codesaver.owaisfarooq.repl.co/';
+let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : 'https://' + window.location.hostname + '/';
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id');
 let type = params.get('type');
-let auth = params.get('auth');
+let auth = localStorage.getItem('token');
 const currentUrl = window.location.href;
 var data;
 let navbarNav = document.getElementById("navbarNav");
-if (auth == 'true') {
+function getheaders () {
+  return {
+    "Content-Type":"application/json",
+    "x-access-token": localStorage.getItem('token')
+  }
+}
+
+if (auth) {
   nav.innerHTML +=
     `
   <div class="container-fluid">
-    <a class="navbar-brand" href="/?auth=true">CodeSaver</a>
+    <a class="navbar-brand" href="/">CodeSaver</a>
       <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="nav-items" style="margin-left: auto;">
           <li class="nav-item" style="margin-left: auto;">
             <li class="nav-item" style="margin-left: auto;">
-              <a href="/lab-activities/?auth=true" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
+              <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
             </li>
-            <a href="/new/?auth=true" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
+            <a href="/new/" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
           </li>
         </ul>
       </div>
@@ -32,10 +39,10 @@ if (auth == 'true') {
       <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="nav-items" style="margin-left: auto;">
           <li class="nav-item" style="margin-left: auto;">
-            <a href="/login/?oldPage=${currentUrl}&type=${type}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Login</a>
+            <a href="/lab-activities" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
           </li>
           <li class="nav-item" style="margin-left: auto;">
-            <a href="/lab-activities" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
+            <a href="/login/?oldPage=${currentUrl}&type=${type}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Login</a>
           </li>
         </ul>
       </div>

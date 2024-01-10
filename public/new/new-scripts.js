@@ -5,6 +5,13 @@ let id = params.get('id');
 let type = params.get('type');
 setTimeout(makeCard, 1);
 
+function getheaders () {
+  return {
+    "Content-Type":"application/json",
+    "x-access-token": localStorage.getItem('token')
+  }
+}
+
 document.addEventListener("keydown", function(e) {
   if (e.ctrlKey && e.key === 's') {
     e.preventDefault();
@@ -49,10 +56,7 @@ function saveCard() {
     const codeToSend = document.getElementById('code').value;
 
     fetch(url + 'save/?new=true&type=codes', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: getheaders(),
       method: "POST",
       body: JSON.stringify({
         title: titleToSend,
@@ -81,10 +85,7 @@ function saveCard() {
     const codeToSend = document.getElementById('code').value;
     fetch(url + 'save/?new=true&type=activities',
       {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+        headers: getheaders(),
         method: "POST",
         body: JSON.stringify({
           chapter: Number(chapterToSend),

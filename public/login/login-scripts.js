@@ -1,57 +1,50 @@
 let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : 'https://' + window.location.hostname + '/';
 const params = new URLSearchParams(window.location.search);
 const oldPage = params.get('oldPage');
-// console.log("oldPage:" + oldPage + " params.get('oldPage'): " + params.get('oldPage'));
 
-// document.getElementById("submit-btn").addEventListener("click", function(event){
-//   event.preventDefault();
-//   submit();
-// });
-// async function submit() {
-//   console.log("asdasd");
-//   const username = document.getElementById("username").value;
-//   const password = document.getElementById("password").value;
-//   console.log("username: " + username + "\npassword: " + password);
-//   // preventDefault()
-//   fetch(url + "login/",{
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     method: "POST",
-//     body: JSON.stringify({
-//       username: username,
-//       password: password
-//     })
-//   },(data) => {
-//     console.log("data: " + data);
-//   })
-//   .then(()=>{
-//     // console.log("response: " + resposnse);
-//   });
-// }
-function submit() {
+function openToast(heading, message, color) {
+    const subHeading = document.getElementById('cardHeading');
+    const bodyOfToast = document.getElementById('toast-body');
+    subHeading.innerHTML = heading;
+    bodyOfToast.innerHTML = message;
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+}
+
+
+async function submit() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
-  let accessGranted = false;
-  // console.log("username: " + username + "\npassword: " + password);
-
-  if (username == "owais" && password == "superuser") {
-    accessGranted = true;
-    // url.searchParams.append('auth', true);
-
-  } else if (username == "rae" && password == "iamcrazy") {
-    accessGranted = true;
-  }
-  if (accessGranted) {
-    if (oldPage.includes("?")) {
-      window.location.replace(oldPage + "&auth=true");
-    } else if (!oldPage.includes("?")) {
-      window.location.replace(url + "/lab-activities/" + "?auth=true");
+  
+  try {
+    const res = await fetch(url + 'login/', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    });
+    
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('token', data.token);
+      openToast("Login successfull", "valid credentials", 'green')
+      window.location.replace(oldPage || url);
     } else {
-      window.location.replace(oldPage + "?auth=true");
+      console.log('Login failed');
+      res.json()
+      .then( ( data ) => {
+        openToast("Login failed", data, 'red')
+      });
     }
-  } else {
-    alert("invalid username or password");
+  } catch (error) {
+    openToast("Login failed", error, 'red')
+    console.error('Error:', error);
   }
+  
 }

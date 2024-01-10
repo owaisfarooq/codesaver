@@ -12,6 +12,16 @@
   </script>
 </head>
 <body>
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong id="cardHeading" class="me-auto">Bootstrap</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div id="toast-body" class="toast-body">
+      </div>
+    </div>
+  </div>
   <nav id="nav" class="navbar sticky-top navbar-expand-lg bg-light totalItems labActivities addNewBtnCodes">
     <div class="container-fluid">
       <a class="navbar-brand" id="mainLink" href="/">CodeSaver</a>

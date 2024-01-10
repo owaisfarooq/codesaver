@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 var cors = require('cors');
+const config = require('./config.js');
+var jwt = require('jsonwebtoken');
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({
@@ -16,6 +18,44 @@ let users = [];
 
 readDataFromFile();
 // readActivitiesFromFile();
+
+async function saveToken(token, tokenLife, userId) {
+  fs.readFile(__dirname + '/api/token.json', 'utf8', function readFileCallback(err, data) {
+    if (err) {
+      reject(Error("error : " + err));
+    } else {
+      obj = JSON.parse(data);
+      obj.push({
+        userId: userId,
+        token: token,
+        tokenLife: tokenLife
+      })
+      json = JSON.stringify(obj);
+      fs.writeFile(__dirname + '/api/token.json', json, 'utf8', err => {
+        if (err) {
+          reject(Error("error: " + err));
+          return console.log(err);
+        }
+      });
+    }
+  })
+}
+
+async function isTokenPresent( token, tokenLife, userId ) {
+  fs.readFile(__dirname + '/api/token.json', 'utf8', async function readFileCallback(err, data) {
+    if (err) {
+      return false;
+    } else {
+      obj = JSON.parse(data);
+      obj.forEach( data => {
+        if ( data.token == token && data.tokenLife == tokenLife && data.userId == userId ) {
+          return true;
+        }
+      });
+      return false;
+    }
+  })
+}
 
 var deleteCode = function(id, type) {
   return new Promise(function(resolve, reject) {
@@ -194,6 +234,7 @@ async function readDataFromFile() {
 //   }
 //   readDataFromFile();
 // }
+
 function writeCodesToFile(dataToUpdate, isNew) {
   if (isNew == 'true') {
     fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
@@ -355,6 +396,60 @@ function getIndexByIdOfCodes(id) {
   }
 }
 
+let allowedUrls = [
+  '/',
+  '/login/',
+  'view',
+  '/lab-activities/',
+  '/loading/',
+  '/codes/',
+  '/activities/'
+]
+
+app.use( async function ( req, res, next ) {
+  if( allowedUrls.find ( x => x.toLocaleLowerCase() == req.path.toLocaleLowerCase() ) && req.method.toLowerCase() == 'GET'.toLowerCase() ) {
+    next();
+    return;
+  }
+  if ( req.method.toLowerCase() == 'GET'.toLowerCase() ) {
+    next();
+    return;
+  }
+
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
+  if(!token){
+    if(!allowedUrls.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
+      res.sendStatus(403);
+      return;
+    }else{
+      next();
+      return;
+    }
+  }
+  jwt.verify(token, config.secret, async function(err, decoded) {
+    if (err) {
+      if(!allowedURLs.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
+        return res.status(401).send("Failed to authenticate token");
+      }else{
+        next();
+      }
+    } else {
+      if( !decoded.userId ) {
+        return res.status(401).send("Invalid token");
+      }
+
+      if(decoded.exp < (new Date().getTime()/1000)){
+        return res.status(401).send("Exired token")
+      }
+
+      if ( !isTokenPresent( token, decoded.tokenLife, decoded.userId ) ) {
+        return res.status(401).send("Invalid token");
+      }
+      next();
+    }
+  });
+});
+
 app.get('/', (req, res) => {
   readDataFromFile();
   res.sendFile(__dirname + '/public/home/index.html');
@@ -365,17 +460,38 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/public/login/login.html');
 });
-app.post('/login/', (req, res) => {
-  let username = req.query.username;
-  let password = req.query.password;
+app.post('/login/', async (req, res) => {
+  let username =  req.body.username;
+  let password = req.body.password;
   // console.log("username: " + username + "\npassword: " + password);
   for (let index = 0; index < users.length; index++) {
-    const element = users[index];
-    if (element.username == username && element.password == password) {
-      res.send("approved");
+    const userFound = users[index];
+    if (userFound.username == username && userFound.password == password) {
+      const payload = {
+        username: userFound.username,
+        userId: userFound.userId
+      };
+
+      let tokenLife = 86400*365*10; //*365*10; //10 years
+
+      var token = jwt.sign(payload, config.secret, {
+        expiresIn: tokenLife // expires in 24 hours
+      });
+
+      let tokenSaved = await saveToken(token, tokenLife, userFound.userId);
+      var data = {
+        token : token,
+      };
+
+      res.json(data);
+
+      return;
     }
   }
-  res.send("declined");
+
+  res.status(401).send({
+    message: 'invalid username or password'
+  });
 });
 
 // app.post('/login', (req, res) => {

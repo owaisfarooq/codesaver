@@ -1,14 +1,19 @@
-let url = 'https://codesaver.owaisfarooq.repl.co/';
+let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : 'https://' + window.location.hostname + '/';
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id');
-let auth = params.get('auth');
-let type = params.get('type');
+let auth = localStorage.getItem('token');
+let type = params.get('type') || 'codes';
 var data;
-if (auth != "true") {
+if (!auth) {
   window.location.replace(url + 'login/');
 }
 getData();
-
+function getheaders () {
+  return {
+    "Content-Type":"application/json",
+    "x-access-token": localStorage.getItem('token')
+  }
+}
 document.addEventListener("keydown", function(e) {
   if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83) {
     e.preventDefault();
@@ -48,6 +53,7 @@ function copyToClipboard() {
 var deleteData = function() {
   return new Promise(function(resolve, reject) {
     fetch(url + 'delete/?id=' + id + '&type=' + type, {
+      headers: getheaders(),
       method: 'DELETE'
     })
     .then((response) => {
@@ -68,7 +74,7 @@ async function deleteCard() {
           if(type == 'codes'){
             window.location.replace("/");
           }else if(type == 'activities'){
-            window.location.replace("/lab-activities?auth=true");
+            window.location.replace("/lab-activities");
           }
         }, 3000);
       } else {
@@ -88,10 +94,7 @@ function saveCard() {
 
     fetch(url + 'save/?id=' + id + '&type=' + type + '&new=false',
       {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+        headers: getheaders (),
         method: "POST",
         body: JSON.stringify({
           id: Number(id),
@@ -113,10 +116,7 @@ function saveCard() {
     const codeToSend = document.getElementById('code').value;
     
     fetch(url + 'save/?id=' + id + '&type=' + type + '&new=false',{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: getheaders (),
       method: "POST",
       body: JSON.stringify({
         id: Number(id),
@@ -132,31 +132,19 @@ function saveCard() {
   }
 }
 
-// function saveCard() {
-
-//   const response = fetch(url + 'save/?id=' + id, {
-//     method: 'POST',
-//     mode: 'cors',
-//     cache: 'no-cache',
-//     credentials: 'same-origin',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     redirect: 'follow',
-//     referrerPolicy: 'no-referrer',
-//     body: JSON.stringify(data)
-//   });
-//   console.log();
-// }
 
 function getData() {
   if (type == "codes") {
-    fetch(url + 'codes/' + id)
+    fetch(url + 'codes/' + id, {
+      headers: getheaders ()
+    })
       .then(res => res.json())
       .then(json => data = json)
       .then(() => this.makeCard())
   } else if (type == "activities") {
-    fetch(url + "activities/" + id)
+    fetch(url + "activities/" + id, {
+      headers: getheaders ()
+    })
       .then(res => res.json())
       .then(json => data = json)
       .then(() => this.makeCard())

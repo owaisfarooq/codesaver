@@ -2,19 +2,28 @@ let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : '
 const currentUrl = window.location.href;
 const params = new URLSearchParams(window.location.search);
 const sortBy = params.get('sortBy');
-const auth = params.get('auth');
+const auth = localStorage.getItem('token');
 // navigator.clipboard.readText();
 
-if (auth == 'true') {
+function getheaders () {
+  return {
+    "Content-Type":"application/json",
+    "x-access-token": localStorage.getItem('token')
+  }
+}
+
+
+
+if (auth) {
 
   document.getElementById("nav").innerHTML += `
   <div class="container-fluid">
-    <a class="navbar-brand" id="mainLink" href="/?auth=true">CodeSaver</a>
+    <a class="navbar-brand" id="mainLink" href="/">CodeSaver</a>
     <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
           <a class="navbar-brand" id="total-items">Total Items: </a>
           <li class="nav-item" style="margin-left: auto;">
-            <a href="/lab-activities/?auth=true" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
+            <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
           </li>
           <li class="nav-item" style="margin-left: auto;">
             <a href="/new?type=codes" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
@@ -59,6 +68,7 @@ function copyToClipboard(id) {
 
 function deleteCard(id) {
   fetch(url + 'delete/?cardId=' + id, {
+    headers: getheaders(),
     method: 'DELETE'
   });
   card = document.getElementById('cardId' + id);
@@ -99,7 +109,9 @@ function getIndexById(Id) {
 //   name: "Demo Animation", // optional
 // });
 function getData() {
-  fetch(url + 'codes/')
+  fetch(url + 'codes/', {
+    headers: getheaders()
+  })
     .then(res => res.json())
     .then(json => data = json)
     .then(() => this.makeCards());
@@ -165,7 +177,7 @@ function makeCards() {
                             <h5 class="card-title">${data[i].author}</h5>
                             <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
                             <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                            <a class="btn btn-success" href="${url}/edit?id=${data[i].id}&type=codes" >Edit</a>
+                            <a class="btn btn-success" href="${url}/view?id=${data[i].id}&type=codes">View</a>
                         </div>
                     </div>
                 </div>

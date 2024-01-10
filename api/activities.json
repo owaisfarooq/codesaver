@@ -1,1 +1,246 @@
-[{"id":7,"chapter":5,"activityNo":"7","author":"Owais","code":"#include <iostream>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\t\n\tint a[2][4] = {{14, 8, 11, 10}, {15, 12, 20, 3}};\n\tint b[2][4] = {{2, 3, 4, 7}, {6, 7, 8, 9}};\n\t\n\tfor(int i = 0; i < 2; i++){\n\t\tfor(int j = 0; j < 4; j++){\n\t\t\tcout << a[i][j] + b[i][j] << \" \";\n\t\t}\n\t\tcout << endl;\n\t}\n\tgetch();\n\treturn 0;\n}"},{"id":2,"chapter":5,"activityNo":8,"author":"Owais","code":"#include <iostream>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\t\n\tint c, r;\n\t\n//\tgetting number of rows and columns\n\t\n\tcout << \"Enter the number of rows: \";\n\tcin >> r;\n\tcout << \"\\nEnter the number of columns: \" << endl;\n\tcin >> c;\n\t\t\n\tint x[r][c];\n\n//\tgetting value for array\n\n\tfor(int i = 0; i < r; i++){\n\t\tfor(int j = 0; j < c; j++){\n\t\t\tcout << \"\\n Enter value of row: \" << i+1 << \" and column: \" << j+1 << \":\";\n\t\t\tcin >> x[i][j];\n\t\t}\n\t\tcout << endl;\n\t}\n\t\n//\tproducing and displaying the sum\n\n\tfor(int i = 0; i < r; i++){\n\t\tint sum = 0;\n\t\tfor(int j = 0; j < c; j++){\n\t\t\tsum += x[i][j];\n\t\t}\n\t\tcout << \"\\n sum of row: \" << i << \": \" << sum;\n\t}\n\n\n\tgetch();\n\treturn 0;\n}"},{"id":3,"chapter":6,"activityNo":"5","author":"rae","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nbool prime(int x) {\n\tint count, i;\n\tfor(i=2;i<=x;i++) {\n\t\tif (x%i==0)\n\t\t\tcount++;\n\t\t\tbreak;\n\t}\n\tif (count>1) \n\t\treturn true;\n}\nint main () {\n\tint a;\n\tcout<<\"\\nEnter an integer:\";\n\tcin>>a;\n\tif ((a==1)||(a==0))\n\t\tcout<<\"\\nneither prime nor composite.\";\n\telse if (prime(a))\n\t\tcout<<\"\\nPrime.\";\n\telse \n\t\tcout<<\"\\nComposite.\";\n\treturn 0;\n}"},{"id":0,"chapter":4,"activityNo":"13","author":"owais","code":"#include<iostream>\n#include<conio.h>\n#include<math.h>\nusing namespace std;\n\t\nint main() {\n\tfloat a, b, c;\n\t\n//\ttaking inputs\n\t\n\tcout << \"Enter the value of a: \";\n\tcin >> a;\n\tcout << \"Enter the value of b: \";\n\tcin >> b;\n\tcout << \"Enter the value of c: \";\n\tcin >> c;\n\t\n//\tcalculations\n\n\tfloat disc = sqrt(b*b - 4.0*a*c);\n\tfloat ans1 = (-b + disc)/(2.0*a);\n\tfloat ans2 = (-b - disc)/(2.0*a);\n\n//\tgiving the ans\t\n\n\tcout << \"\\n ans1= \" << ans1 << \"\\n ans2= \" << ans2;\n\t\t\n\treturn 0;\n}"},{"chapter":6,"activityNo":3,"author":"rae","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint rectangle(int x, int y) {\n\tint z = x*y;\n\treturn z;\n}\t\nint main() {\n\tint a, b;\n\tcout<<\"Enter the length of rectangle: \";\n\tcin>>a;\n\tcout<<\"\\nEnter the width of rectangle: \";\n\tcin>>b;\n\tcout<<\"\\nThe area is \"<<rectangle(a,b);\n\treturn 0;\n}","id":4},{"chapter":6,"activityNo":1,"author":"rae","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint sum(int x, int y);\nint main() {\n\tint a, b;\n\tcout<<\"\\nEnter two integers:\";\n\tcin>>a>>b;\n\tcout<<\"\\nSum= \"<<sum(a,b);\n}\nint sum(int x, int y) {\n\treturn x+y;\n}\n","id":5},{"chapter":5,"activityNo":4,"author":"Owais","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint main() {\n\tint arr[15]={4,8,5,1,3,5,0,12,5,7,3,15,8,4,11};\n\tint i=0, count=0;\n\tfor(i=0;i<16;i++) {\n\t\tif(arr[i]==5)\n\t\tcount++;\n\t}\n\tcout<<\"Number of times 5 appeared=\"<<count;\n\tgetch();\n\t\n\t}\n","id":10},{"chapter":6,"activityNo":6,"author":"RAE","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint table(int x) {\n\tcout<<\"\\nTable is:\"<<endl;\n\tfor (int i=1;i<=10;i++)\n\t\tcout<<x<<\"x\"<<i<<\"=\"<<x*i<<endl;\n\treturn 0;\n}\nint main() {\n\tint a;\n\tcout<<\"\\nEnter an integer for table:\";\n\tcin>>a;\n\ttable(a);\n\tgetch();\n}","id":8},{"chapter":6,"activityNo":4,"author":"RAE","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint area(int x) {\n\tint z = x*x;\n\treturn z;\n}\n\nint peri(int x) {\n\tint z = 4*x;\n\treturn z;\n}\n\nint main() {\n\tint a;\n\tcout<<\"\\nEnter the length of one side of the square: \";\n\tcin>>a;\n\tcout<<\"\\nArea is \"<<area(a);\n\tcout<<\"\\nPerimeter is \"<<peri(a);\n\treturn 0;\n}","id":9},{"id":1,"chapter":5,"activityNo":2,"author":"rae","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint main()\n{\n\tint a[10], i;\n\tcout<<\"\\nEnter ten numbers:\";\n\tfor(i=0;i<10;i++)\n\t\tcin>>a[i];\n\tfor(i=9;i>=0;i--)\n\t\tcout<<a[i];\n\tgetch();\n}\n"},{"chapter":6,"activityNo":2,"author":"rae","code":"#include<iostream>\n#include<conio.h>\nusing namespace std;\nint mean(int x, int y, int z);\nint main() {\n\tint a, b, c;\n\tcout<<\"\\nEnter 3 integers:\";\n\tcin>>a>>b>>c;\n\tcout<<\"\\nThe mean is \"<<mean(a,b,c);\n}\nint mean(int x, int y, int z) {\n\treturn ((x+y+z)/3);\n}\n","id":11},{"chapter":5,"activityNo":3,"author":"rae","code":"#include<iostream>\n#include<conio.h> \nusing namespace std;\nint main() {\n\tint a[10], i, smallest, index;\n\tcout<<\"\\nEnter ten integers:\";\n\tfor(i=0;i<10;i++)\n\t\tcin>>a[i];\n\tsmallest=a[0];\n\tfor(i=0;i<10;i++) {\n\t\tif(a[i]<smallest) {\n\t\t\tsmallest=a[i];\n\t\t\tindex=i; }\n\t}\n\t\tcout<<\"\\nSmallest is \"<<smallest;\n\t\tcout<<\"\\nIndex is \"<<index;\n\tgetch();\n}","id":12},{"id":14,"chapter":8,"activityNo":1,"author":"Owais","code":"//\timporting header files\n#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass Circle{\n\n//\tcreating a variable to store the radius of the circle\n\n\tprivate:\n\t\tfloat radius;\n\n\tpublic:\n\n//\tmaking a function to get radius from user \n\n\t\tvoid GetRadius() {\n\t\t\tcout << \"Enter the radius: \";\n\t\t\tcin >> radius; // storing the value into radius\n\t\t}\n\n//\tmaking a function to calculate the area of the circle\n\n\t\tvoid CalArea() {\n\t\t\tfloat area = 3.141 * (radius * radius); // calculating the area of the circle\n\t\t\tcout << \"\\narea = \" << area; // displaying the area\n\t\t}\n};\n\n//\tmain function\n\nint main (){\n\t\n\tCircle a; // making an object with name 'a' of class \"Circle\"\n//\tcalling the functions to take input and calculate the area of the circle\n\ta.GetRadius();\n\ta.CalArea();\n\treturn 0;\n}"},{"chapter":8,"activityNo":2,"author":"Owais","code":"#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass Employee{\n\tpublic:\n\t\tint age;\n\n};\n\nclass Manager : public Employee{\n\tpublic:\n\t\t\n};\n\nint main (){\n\treturn 0;\n}","id":15},{"chapter":8,"activityNo":3,"author":"Owais","code":"#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass ConstDest{\n\tpublic:\n//\tcreating the constructor functions\n\t\tConstDest(){\n\t\t\tcout << \"Hey i am a constructor, i am executed whenever an object is created!\" << endl;\n\t\t}\n//\tcreating the destructor functions\t\n\t\t~ConstDest(){\n\t\t\tcout << \"Hey i am a destructor, i am executed whenever an object is destroyed!\" << endl;\n\t\t}\n};\n\nint main (){\n//\tcreating an object of class ConstDest\n\tConstDest abc;\n//\tThe object is automatically destroyed when the program ends\n\tgetch();\n\treturn 0;\n}","id":16},{"chapter":8,"activityNo":4,"author":"Owais","code":"//\timporting header files\n#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Time\n\nclass Time{\n\n\tpublic:\n\t\tint hours, minutes, seconds;\n\n//\tcreating the constructor function\n\t\tvoid ConstDest(){\n//\tinitiallizing all variables\n\t\t\thours = 0;\n\t\t\tminutes = 0;\n\t\t\tseconds = 0;\n\t\t}\n\n//\tcreating a function to convert into seconds\n\t\tint toSeconds(){\n\t\t\treturn (hours*60*60) + (minutes*60) + (seconds);\n\t\t}\n\n};\n\n//\tmain function\n\nint main (){\n\t\n\tTime T1; // making an object with name 'T1' of class \"Time\"\n//\ttaking input and assigning to the variables of object 'T1'\n\t\n\tcout << \"Enter hours: \";\n\tcin >> T1.hours;\n\t\n\tcout << \"\\nEnter minutes: \";\n\tcin >> T1.minutes;\n\t\n\tcout << \"\\nEnter seconds: \";\n\tcin >> T1.seconds;\n\t\n//\tconverting to seconds by calling the 'toSeconds()' function\n\tcout <<\t\"\\nTotal seconds = \" << T1.toSeconds();\n\n\treturn 0;\n}","id":17},{"id":6,"chapter":5,"activityNo":5,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\n\tint a[3][2]\t={{6, 3},{7, 8},{4, 5}};\n\tint i, j;\n\n\tfor (i = 0; i<3; i++){\n\t\tfor (j=0; j<2; j++){\n\t\t\tcout << a[i][j] << \"  \";\n\t\t}\n\t\tcout << endl;\n\t}\n\tgetch();\n\treturn 0;\n}"},{"chapter":5,"activityNo":6,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\n\tint a[3][4]\t={{4, 18, -16, 11},{-5, 10, -2, 12},{15, -3, 17, 18}};\n\tint i, j;\n\tint sum = 0;\n\t\n\tfor (i = 0; i<3; i++){\n\t\tfor (j=0; j<4; j++){\n\t\t\tif(a[i][j] > 0){\n\t\t\t\tsum += a[i][j];\n\t\t\t}\n\t\t}\n\t}\n\tcout << \"Sum = \" << sum;\n\tgetch();\n\treturn 0;\n}","id":13},{"chapter":5,"activityNo":9,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[50], str2[50];\n\t\n\tcout << \"Enter string1: \";\n\tcin.get(str1, 50);\n\t\n\tstrcpy(str2, str1);\n\t\n\tcout << \"string1= \" << str1 << endl;\n\tcout << \"string2= \" << str2;\n\t\n\tgetch();\n\treturn 0;\n}","id":18},{"id":19,"chapter":5,"activityNo":10,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[20], str2[20];\n\t\n\tcout << \"Enter string1: \";\n\tcin.get(str1, 20);\n\t\n\tcout << \"Enter string2: \";\n\tcin.get(str2, 20);\n\t\n\tcout << \"string1= \" << str1 << \"\\nLength of string1= \" << strlen(str1) <<  \"\\n\\n\";\n\tcout << \"string2= \" << str2 << \"\\nLength of string2= \" << strlen(str2) <<  \"\\n\\n\";\n\t\n\tstrcat(str1, str2);\n\tcout << \"\\nafter concatination \\nstring1= \" << str1;\n\tgetch();\n\treturn 0;\n}"},{"chapter":5,"activityNo":11,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[50], str2[50], str3[50];\n\t\n\tcout << \"Enter string1: \";\n\tcin >> str1;\n\t\n\tcout << \"Enter string2: \";\n\tcin >> str2;\n\t\n\tcout << \"Enter string3: \";\n\tcin >> str3;\n\t\n\tint lengthStr1 = strlen(str1);\n\tint lengthStr2 = strlen(str2);\n\tint lengthStr3 = strlen(str3);\n\t\n\tif(lengthStr1 < lengthStr2 && lengthStr1 < lengthStr3){\n\t\tcout << str1;\n\t}else if(lengthStr2 < lengthStr3 && lengthStr2 < lengthStr1){\n\t\tcout << str2;\n\t}else{\n\t\tcout << str3;\n\t}\n\t\n\tgetch();\n\treturn 0;\n}","id":20},{"id":21,"chapter":3,"activityNo":2,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\tint a, b, c, d, sum, prod, avg;\n\t\n\tcout << \"Enter four numbers: \\n\";\n\tcin >> a >> b >> c >> d;\n\t\n\tsum = a + b + c + d;\n\tprod = a * b * c * d;\n\tavg = sum/4;\n\t\n\tcout << \"Sum = \" << sum << endl;\n\tcout << \"Prodcut = \" << prod << endl;\n\tcout << \"Average = \" << avg << endl;\n\t\t\n\tgetch();\n\treturn 0;\n}"},{"chapter":3,"activityNo":3,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\tint length, breadth, area;\n\t\n\tcout << \"Enter the length: \\n\";\n\tcin >> length;\n\t\n\tcout << \"Enter the breadth: \\n\";\n\tcin >> breadth;\n\t\n\tarea = length * breadth;\n\t\t\n\tcout << \"Area = \" << area << endl;\n\t\t\n\tgetch();\n\treturn 0;\n}","id":22},{"chapter":3,"activityNo":4,"author":"Owais","code":"#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main () {\n\tfloat tempF, tempC;\n\n\tcout << \"Enter temperature in fahrenheit: \";\n\tcin >> tempF;\n\t\n\ttempC = (5.0/9.0)*(tempF - 32);\n\t\n\tcout << \"temperature in celcuis= \" << tempC;\n\t\t\n\tgetch();\n\treturn 0;\n}","id":23},{"chapter":4,"activityNo":12,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint i, answer = 1;     //  declare variable to store user input and one for the answer\n\t\n\tcout << \"Enter an integer\";\n\tcin >> i;  //\tget input and store in variable `i`\n\n//  going backwards from the integer all the way to 1\n\t\n\tfor (int j = i; j>0; j--){\n\t\tanswer = answer * j; // multiplying because : 5! = 5*4*3*2*1   ...   so everytime the loop is executed, j becomes 1 less\n\t}\n\tcout << \"Factorial of \" << i << \" is : \" << answer;\n\treturn 0;\n}","id":25},{"chapter":4,"activityNo":11,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main () {\n\tint sum = 0;\n\t\n\tfor (int i = 0; i <= 50; i++){ // looping upto 50 as per the limit\n\t\n\t\tif (i%5 == 0){ // checking if i is divisble by 5\n\t\t\tcontinue; // this statement skips everything else and goes to the next iteration\n\t\t}\n\t\n\t\tsum = sum + i;  // adds i into sum\n\t\n\t}\n\tcout << \"Sum = \" << sum; // printing output\n\treturn 0;\n\t\n}","id":26},{"chapter":4,"activityNo":10,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\t\n\tint sum = 0, i = 30; //starting from 30 \n\t\n\twhile (i <= 60){  // ending at 60 as defined by the book\n\t\tsum = sum + i;\n\t\ti = i + 3; //adding 3 each time \n\t}\n\t\n\tcout << \"sum = \" << sum; // printing result\n\t\n\treturn 0;\n}","id":27},{"chapter":4,"activityNo":9,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\t\n\tint sum = 0;\n\t\n\tfor (int i = 30; i <= 60; i = i + 3){  //starting from 30 and ending at 60 and adding 3 each time as defined by the book\n\t\tsum = sum + i;\n\t}\n\t\n\tcout << \"sum = \" << sum; // printing result\n\t\n\treturn 0;\n}","id":28},{"chapter":4,"activityNo":8,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tfloat celsius;\n\tint fahrenheit;\n\tcout << \"Celsius \\t Fahrenheit\";\n\t\n\tfor (fahrenheit = 50; fahrenheit <= 100; fahrenheit += 5){\n\t\tcelsius = (5/9) * (fahrenheit - 32);\n\t\tcout << \"\\n  \" << fahrenheit << \"\\t\\t      \" << celsius;\n\t}\n\t\n\treturn 0;\n}","id":30},{"chapter":4,"activityNo":7,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint basicPay = 0, netPay = 0;\n\tfloat houseRent = 0.0;\n\tcout << \"Enter BasicPay: \";\n\tcin >> basicPay;\n\t\n\tif (basicPay < 30000){\n\t\thouseRent = (30.0/100.0) * basicPay;\n\t}\n\tif (basicPay > 50000){\n\t\thouseRent = (40.0/100.0) * basicPay;\n\t}\n\tif (basicPay >= 30000 && basicPay <= 50000){\n\t\thouseRent = (35.0/100.0) * basicPay;\n\t}\n\t\n\tnetPay = basicPay + houseRent;\n\tcout << \"netPay = \" << netPay;\n\t\n\treturn 0;\n}","id":29},{"chapter":4,"activityNo":6,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint input;\n\n\tcout << \"Enter an integer: \";\n\tcin >> input;\n\t\n\tfor (int i = 1; i <= 20; i++){\n\t\tcout << input << \" X \" << i << \" = \" << input * i << \"\\n\";\n\t}\n\n\treturn 0;\n}","id":31},{"chapter":4,"activityNo":5,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tchar input;\n\t\n\tcout << \"Enter an charachter: \";\n\tcin >> input;\n\t\n\tint asciiValue = int(input);\n\t\n\tif (asciiValue >= 65 && asciiValue <= 90){\n\t\tcout << \"You've Entered an uppercase letter!\";\n\t}\n\tif (asciiValue >= 97 && asciiValue <= 122){\n\t\tcout << \"You've Entered a lowercase letter!\";\n\t}\n\t\n\treturn 0;\n}","id":32},{"chapter":4,"activityNo":4,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a, b, c, largest;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a >> b >> c;\n\t\n\tif (a > b && a > c){\n\t\tlargest = a;\n\t}\n\tif (b > a && b > c){\n\t\tlargest = b;\n\t}else {\n\t\tlargest = c;\n\t}\n\t\n\tcout << \"Largest = \" << largest;\n\t\n\treturn 0;\n}","id":33},{"chapter":4,"activityNo":3,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a;\n\t\n\tif (a % 2 == 0){\n\t\tcout << \"Even\";\n\t}else {\n\t\tcout << \"Odd\";\n\t}\n\t\n\treturn 0;\n}","id":34},{"chapter":4,"activityNo":2,"author":"Owais","code":"#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a;\n\t\n\tif (a > 10){\n\t\tcout << a*a;\n\t}else {\n\t\tcout << a*a*a;\n\t}\n\t\n\treturn 0;\n}","id":35}]
+[{
+    "id": 7,
+    "chapter": 5,
+    "activityNo": "7",
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\t\n\tint a[2][4] = {{14, 8, 11, 10}, {15, 12, 20, 3}};\n\tint b[2][4] = {{2, 3, 4, 7}, {6, 7, 8, 9}};\n\t\n\tfor(int i = 0; i < 2; i++){\n\t\tfor(int j = 0; j < 4; j++){\n\t\t\tcout << a[i][j] + b[i][j] << \" \";\n\t\t}\n\t\tcout << endl;\n\t}\n\tgetch();\n\treturn 0;\n}"
+}, {
+    "id": 2,
+    "chapter": 5,
+    "activityNo": 8,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\t\n\tint c, r;\n\t\n//\tgetting number of rows and columns\n\t\n\tcout << \"Enter the number of rows: \";\n\tcin >> r;\n\tcout << \"\\nEnter the number of columns: \" << endl;\n\tcin >> c;\n\t\t\n\tint x[r][c];\n\n//\tgetting value for array\n\n\tfor(int i = 0; i < r; i++){\n\t\tfor(int j = 0; j < c; j++){\n\t\t\tcout << \"\\n Enter value of row: \" << i+1 << \" and column: \" << j+1 << \":\";\n\t\t\tcin >> x[i][j];\n\t\t}\n\t\tcout << endl;\n\t}\n\t\n//\tproducing and displaying the sum\n\n\tfor(int i = 0; i < r; i++){\n\t\tint sum = 0;\n\t\tfor(int j = 0; j < c; j++){\n\t\t\tsum += x[i][j];\n\t\t}\n\t\tcout << \"\\n sum of row: \" << i << \": \" << sum;\n\t}\n\n\n\tgetch();\n\treturn 0;\n}"
+}, {
+    "id": 3,
+    "chapter": 6,
+    "activityNo": "5",
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nbool prime(int x) {\n\tint count, i;\n\tfor(i=2;i<=x;i++) {\n\t\tif (x%i==0)\n\t\t\tcount++;\n\t\t\tbreak;\n\t}\n\tif (count>1) \n\t\treturn true;\n}\nint main () {\n\tint a;\n\tcout<<\"\\nEnter an integer:\";\n\tcin>>a;\n\tif ((a==1)||(a==0))\n\t\tcout<<\"\\nneither prime nor composite.\";\n\telse if (prime(a))\n\t\tcout<<\"\\nPrime.\";\n\telse \n\t\tcout<<\"\\nComposite.\";\n\treturn 0;\n}"
+}, {
+    "id": 0,
+    "chapter": 4,
+    "activityNo": "13",
+    "userId": 1,
+    "author": "owais",
+    "code": "#include<iostream>\n#include<conio.h>\n#include<math.h>\nusing namespace std;\n\t\nint main() {\n\tfloat a, b, c;\n\t\n//\ttaking inputs\n\t\n\tcout << \"Enter the value of a: \";\n\tcin >> a;\n\tcout << \"Enter the value of b: \";\n\tcin >> b;\n\tcout << \"Enter the value of c: \";\n\tcin >> c;\n\t\n//\tcalculations\n\n\tfloat disc = sqrt(b*b - 4.0*a*c);\n\tfloat ans1 = (-b + disc)/(2.0*a);\n\tfloat ans2 = (-b - disc)/(2.0*a);\n\n//\tgiving the ans\t\n\n\tcout << \"\\n ans1= \" << ans1 << \"\\n ans2= \" << ans2;\n\t\t\n\treturn 0;\n}"
+}, {
+    "chapter": 6,
+    "activityNo": 3,
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint rectangle(int x, int y) {\n\tint z = x*y;\n\treturn z;\n}\t\nint main() {\n\tint a, b;\n\tcout<<\"Enter the length of rectangle: \";\n\tcin>>a;\n\tcout<<\"\\nEnter the width of rectangle: \";\n\tcin>>b;\n\tcout<<\"\\nThe area is \"<<rectangle(a,b);\n\treturn 0;\n}",
+    "id": 4
+}, {
+    "chapter": 6,
+    "activityNo": 1,
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint sum(int x, int y);\nint main() {\n\tint a, b;\n\tcout<<\"\\nEnter two integers:\";\n\tcin>>a>>b;\n\tcout<<\"\\nSum= \"<<sum(a,b);\n}\nint sum(int x, int y) {\n\treturn x+y;\n}\n",
+    "id": 5
+}, {
+    "chapter": 5,
+    "activityNo": 4,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint main() {\n\tint arr[15]={4,8,5,1,3,5,0,12,5,7,3,15,8,4,11};\n\tint i=0, count=0;\n\tfor(i=0;i<16;i++) {\n\t\tif(arr[i]==5)\n\t\tcount++;\n\t}\n\tcout<<\"Number of times 5 appeared=\"<<count;\n\tgetch();\n\t\n\t}\n",
+    "id": 10
+}, {
+    "chapter": 6,
+    "activityNo": 6,
+    "userId": 2,
+    "author": "RAE",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint table(int x) {\n\tcout<<\"\\nTable is:\"<<endl;\n\tfor (int i=1;i<=10;i++)\n\t\tcout<<x<<\"x\"<<i<<\"=\"<<x*i<<endl;\n\treturn 0;\n}\nint main() {\n\tint a;\n\tcout<<\"\\nEnter an integer for table:\";\n\tcin>>a;\n\ttable(a);\n\tgetch();\n}",
+    "id": 8
+}, {
+    "chapter": 6,
+    "activityNo": 4,
+    "userId": 2,
+    "author": "RAE",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint area(int x) {\n\tint z = x*x;\n\treturn z;\n}\n\nint peri(int x) {\n\tint z = 4*x;\n\treturn z;\n}\n\nint main() {\n\tint a;\n\tcout<<\"\\nEnter the length of one side of the square: \";\n\tcin>>a;\n\tcout<<\"\\nArea is \"<<area(a);\n\tcout<<\"\\nPerimeter is \"<<peri(a);\n\treturn 0;\n}",
+    "id": 9
+}, {
+    "id": 1,
+    "chapter": 5,
+    "activityNo": 2,
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint main()\n{\n\tint a[10], i;\n\tcout<<\"\\nEnter ten numbers:\";\n\tfor(i=0;i<10;i++)\n\t\tcin>>a[i];\n\tfor(i=9;i>=0;i--)\n\t\tcout<<a[i];\n\tgetch();\n}\n"
+}, {
+    "chapter": 6,
+    "activityNo": 2,
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint mean(int x, int y, int z);\nint main() {\n\tint a, b, c;\n\tcout<<\"\\nEnter 3 integers:\";\n\tcin>>a>>b>>c;\n\tcout<<\"\\nThe mean is \"<<mean(a,b,c);\n}\nint mean(int x, int y, int z) {\n\treturn ((x+y+z)/3);\n}\n",
+    "id": 11
+}, {
+    "chapter": 5,
+    "activityNo": 3,
+    "userId": 2,
+    "author": "rae",
+    "code": "#include<iostream>\n#include<conio.h> \nusing namespace std;\nint main() {\n\tint a[10], i, smallest, index;\n\tcout<<\"\\nEnter ten integers:\";\n\tfor(i=0;i<10;i++)\n\t\tcin>>a[i];\n\tsmallest=a[0];\n\tfor(i=0;i<10;i++) {\n\t\tif(a[i]<smallest) {\n\t\t\tsmallest=a[i];\n\t\t\tindex=i; }\n\t}\n\t\tcout<<\"\\nSmallest is \"<<smallest;\n\t\tcout<<\"\\nIndex is \"<<index;\n\tgetch();\n}",
+    "id": 12
+}, {
+    "id": 14,
+    "chapter": 8,
+    "activityNo": 1,
+    "userId": 1,
+    "author": "Owais",
+    "code": "//\timporting header files\n#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass Circle{\n\n//\tcreating a variable to store the radius of the circle\n\n\tprivate:\n\t\tfloat radius;\n\n\tpublic:\n\n//\tmaking a function to get radius from user \n\n\t\tvoid GetRadius() {\n\t\t\tcout << \"Enter the radius: \";\n\t\t\tcin >> radius; // storing the value into radius\n\t\t}\n\n//\tmaking a function to calculate the area of the circle\n\n\t\tvoid CalArea() {\n\t\t\tfloat area = 3.141 * (radius * radius); // calculating the area of the circle\n\t\t\tcout << \"\\narea = \" << area; // displaying the area\n\t\t}\n};\n\n//\tmain function\n\nint main (){\n\t\n\tCircle a; // making an object with name 'a' of class \"Circle\"\n//\tcalling the functions to take input and calculate the area of the circle\n\ta.GetRadius();\n\ta.CalArea();\n\treturn 0;\n}"
+}, {
+    "chapter": 8,
+    "activityNo": 2,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass Employee{\n\tpublic:\n\t\tint age;\n\n};\n\nclass Manager : public Employee{\n\tpublic:\n\t\t\n};\n\nint main (){\n\treturn 0;\n}",
+    "id": 15
+}, {
+    "chapter": 8,
+    "activityNo": 3,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Circle\n\nclass ConstDest{\n\tpublic:\n//\tcreating the constructor functions\n\t\tConstDest(){\n\t\t\tcout << \"Hey i am a constructor, i am executed whenever an object is created!\" << endl;\n\t\t}\n//\tcreating the destructor functions\t\n\t\t~ConstDest(){\n\t\t\tcout << \"Hey i am a destructor, i am executed whenever an object is destroyed!\" << endl;\n\t\t}\n};\n\nint main (){\n//\tcreating an object of class ConstDest\n\tConstDest abc;\n//\tThe object is automatically destroyed when the program ends\n\tgetch();\n\treturn 0;\n}",
+    "id": 16
+}, {
+    "chapter": 8,
+    "activityNo": 4,
+    "userId": 1,
+    "author": "Owais",
+    "code": "//\timporting header files\n#include <iostream>\n#include <conio.h>\n\nusing namespace std;\n\n// making class with name Time\n\nclass Time{\n\n\tpublic:\n\t\tint hours, minutes, seconds;\n\n//\tcreating the constructor function\n\t\tvoid ConstDest(){\n//\tinitiallizing all variables\n\t\t\thours = 0;\n\t\t\tminutes = 0;\n\t\t\tseconds = 0;\n\t\t}\n\n//\tcreating a function to convert into seconds\n\t\tint toSeconds(){\n\t\t\treturn (hours*60*60) + (minutes*60) + (seconds);\n\t\t}\n\n};\n\n//\tmain function\n\nint main (){\n\t\n\tTime T1; // making an object with name 'T1' of class \"Time\"\n//\ttaking input and assigning to the variables of object 'T1'\n\t\n\tcout << \"Enter hours: \";\n\tcin >> T1.hours;\n\t\n\tcout << \"\\nEnter minutes: \";\n\tcin >> T1.minutes;\n\t\n\tcout << \"\\nEnter seconds: \";\n\tcin >> T1.seconds;\n\t\n//\tconverting to seconds by calling the 'toSeconds()' function\n\tcout <<\t\"\\nTotal seconds = \" << T1.toSeconds();\n\n\treturn 0;\n}",
+    "id": 17
+}, {
+    "id": 6,
+    "chapter": 5,
+    "activityNo": 5,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\n\tint a[3][2]\t={{6, 3},{7, 8},{4, 5}};\n\tint i, j;\n\n\tfor (i = 0; i<3; i++){\n\t\tfor (j=0; j<2; j++){\n\t\t\tcout << a[i][j] << \"  \";\n\t\t}\n\t\tcout << endl;\n\t}\n\tgetch();\n\treturn 0;\n}"
+}, {
+    "chapter": 5,
+    "activityNo": 6,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\n\tint a[3][4]\t={{4, 18, -16, 11},{-5, 10, -2, 12},{15, -3, 17, 18}};\n\tint i, j;\n\tint sum = 0;\n\t\n\tfor (i = 0; i<3; i++){\n\t\tfor (j=0; j<4; j++){\n\t\t\tif(a[i][j] > 0){\n\t\t\t\tsum += a[i][j];\n\t\t\t}\n\t\t}\n\t}\n\tcout << \"Sum = \" << sum;\n\tgetch();\n\treturn 0;\n}",
+    "id": 13
+}, {
+    "chapter": 5,
+    "activityNo": 9,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[50], str2[50];\n\t\n\tcout << \"Enter string1: \";\n\tcin.get(str1, 50);\n\t\n\tstrcpy(str2, str1);\n\t\n\tcout << \"string1= \" << str1 << endl;\n\tcout << \"string2= \" << str2;\n\t\n\tgetch();\n\treturn 0;\n}",
+    "id": 18
+}, {
+    "id": 19,
+    "chapter": 5,
+    "activityNo": 10,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[20], str2[20];\n\t\n\tcout << \"Enter string1: \";\n\tcin.get(str1, 20);\n\t\n\tcout << \"Enter string2: \";\n\tcin.get(str2, 20);\n\t\n\tcout << \"string1= \" << str1 << \"\\nLength of string1= \" << strlen(str1) <<  \"\\n\\n\";\n\tcout << \"string2= \" << str2 << \"\\nLength of string2= \" << strlen(str2) <<  \"\\n\\n\";\n\t\n\tstrcat(str1, str2);\n\tcout << \"\\nafter concatination \\nstring1= \" << str1;\n\tgetch();\n\treturn 0;\n}"
+}, {
+    "chapter": 5,
+    "activityNo": 11,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\n#include <string.h>\nusing namespace std;\n\nint main (){\n\n\tchar str1[50], str2[50], str3[50];\n\t\n\tcout << \"Enter string1: \";\n\tcin >> str1;\n\t\n\tcout << \"Enter string2: \";\n\tcin >> str2;\n\t\n\tcout << \"Enter string3: \";\n\tcin >> str3;\n\t\n\tint lengthStr1 = strlen(str1);\n\tint lengthStr2 = strlen(str2);\n\tint lengthStr3 = strlen(str3);\n\t\n\tif(lengthStr1 < lengthStr2 && lengthStr1 < lengthStr3){\n\t\tcout << str1;\n\t}else if(lengthStr2 < lengthStr3 && lengthStr2 < lengthStr1){\n\t\tcout << str2;\n\t}else{\n\t\tcout << str3;\n\t}\n\t\n\tgetch();\n\treturn 0;\n}",
+    "id": 20
+}, {
+    "id": 21,
+    "chapter": 3,
+    "activityNo": 2,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\tint a, b, c, d, sum, prod, avg;\n\t\n\tcout << \"Enter four numbers: \\n\";\n\tcin >> a >> b >> c >> d;\n\t\n\tsum = a + b + c + d;\n\tprod = a * b * c * d;\n\tavg = sum/4;\n\t\n\tcout << \"Sum = \" << sum << endl;\n\tcout << \"Prodcut = \" << prod << endl;\n\tcout << \"Average = \" << avg << endl;\n\t\t\n\tgetch();\n\treturn 0;\n}"
+}, {
+    "chapter": 3,
+    "activityNo": 3,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\tint length, breadth, area;\n\t\n\tcout << \"Enter the length: \\n\";\n\tcin >> length;\n\t\n\tcout << \"Enter the breadth: \\n\";\n\tcin >> breadth;\n\t\n\tarea = length * breadth;\n\t\t\n\tcout << \"Area = \" << area << endl;\n\t\t\n\tgetch();\n\treturn 0;\n}",
+    "id": 22
+}, {
+    "chapter": 3,
+    "activityNo": 4,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main () {\n\tfloat tempF, tempC;\n\n\tcout << \"Enter temperature in fahrenheit: \";\n\tcin >> tempF;\n\t\n\ttempC = (5.0/9.0)*(tempF - 32);\n\t\n\tcout << \"temperature in celcuis= \" << tempC;\n\t\t\n\tgetch();\n\treturn 0;\n}",
+    "id": 23
+}, {
+    "chapter": 4,
+    "activityNo": 12,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint i, answer = 1;     //  declare variable to store user input and one for the answer\n\t\n\tcout << \"Enter an integer\";\n\tcin >> i;  //\tget input and store in variable `i`\n\n//  going backwards from the integer all the way to 1\n\t\n\tfor (int j = i; j>0; j--){\n\t\tanswer = answer * j; // multiplying because : 5! = 5*4*3*2*1   ...   so everytime the loop is executed, j becomes 1 less\n\t}\n\tcout << \"Factorial of \" << i << \" is : \" << answer;\n\treturn 0;\n}",
+    "id": 25
+}, {
+    "chapter": 4,
+    "activityNo": 11,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main () {\n\tint sum = 0;\n\t\n\tfor (int i = 0; i <= 50; i++){ // looping upto 50 as per the limit\n\t\n\t\tif (i%5 == 0){ // checking if i is divisble by 5\n\t\t\tcontinue; // this statement skips everything else and goes to the next iteration\n\t\t}\n\t\n\t\tsum = sum + i;  // adds i into sum\n\t\n\t}\n\tcout << \"Sum = \" << sum; // printing output\n\treturn 0;\n\t\n}",
+    "id": 26
+}, {
+    "chapter": 4,
+    "activityNo": 10,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\t\n\tint sum = 0, i = 30; //starting from 30 \n\t\n\twhile (i <= 60){  // ending at 60 as defined by the book\n\t\tsum = sum + i;\n\t\ti = i + 3; //adding 3 each time \n\t}\n\t\n\tcout << \"sum = \" << sum; // printing result\n\t\n\treturn 0;\n}",
+    "id": 27
+}, {
+    "chapter": 4,
+    "activityNo": 9,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\t\n\tint sum = 0;\n\t\n\tfor (int i = 30; i <= 60; i = i + 3){  //starting from 30 and ending at 60 and adding 3 each time as defined by the book\n\t\tsum = sum + i;\n\t}\n\t\n\tcout << \"sum = \" << sum; // printing result\n\t\n\treturn 0;\n}",
+    "id": 28
+}, {
+    "chapter": 4,
+    "activityNo": 8,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tfloat celsius;\n\tint fahrenheit;\n\tcout << \"Celsius \\t Fahrenheit\";\n\t\n\tfor (fahrenheit = 50; fahrenheit <= 100; fahrenheit += 5){\n\t\tcelsius = (5/9) * (fahrenheit - 32);\n\t\tcout << \"\\n  \" << fahrenheit << \"\\t\\t      \" << celsius;\n\t}\n\t\n\treturn 0;\n}",
+    "id": 30
+}, {
+    "chapter": 4,
+    "activityNo": 7,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint basicPay = 0, netPay = 0;\n\tfloat houseRent = 0.0;\n\tcout << \"Enter BasicPay: \";\n\tcin >> basicPay;\n\t\n\tif (basicPay < 30000){\n\t\thouseRent = (30.0/100.0) * basicPay;\n\t}\n\tif (basicPay > 50000){\n\t\thouseRent = (40.0/100.0) * basicPay;\n\t}\n\tif (basicPay >= 30000 && basicPay <= 50000){\n\t\thouseRent = (35.0/100.0) * basicPay;\n\t}\n\t\n\tnetPay = basicPay + houseRent;\n\tcout << \"netPay = \" << netPay;\n\t\n\treturn 0;\n}",
+    "id": 29
+}, {
+    "chapter": 4,
+    "activityNo": 6,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint input;\n\n\tcout << \"Enter an integer: \";\n\tcin >> input;\n\t\n\tfor (int i = 1; i <= 20; i++){\n\t\tcout << input << \" X \" << i << \" = \" << input * i << \"\\n\";\n\t}\n\n\treturn 0;\n}",
+    "id": 31
+}, {
+    "chapter": 4,
+    "activityNo": 5,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tchar input;\n\t\n\tcout << \"Enter an charachter: \";\n\tcin >> input;\n\t\n\tint asciiValue = int(input);\n\t\n\tif (asciiValue >= 65 && asciiValue <= 90){\n\t\tcout << \"You've Entered an uppercase letter!\";\n\t}\n\tif (asciiValue >= 97 && asciiValue <= 122){\n\t\tcout << \"You've Entered a lowercase letter!\";\n\t}\n\t\n\treturn 0;\n}",
+    "id": 32
+}, {
+    "chapter": 4,
+    "activityNo": 4,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a, b, c, largest;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a >> b >> c;\n\t\n\tif (a > b && a > c){\n\t\tlargest = a;\n\t}\n\tif (b > a && b > c){\n\t\tlargest = b;\n\t}else {\n\t\tlargest = c;\n\t}\n\t\n\tcout << \"Largest = \" << largest;\n\t\n\treturn 0;\n}",
+    "id": 33
+}, {
+    "chapter": 4,
+    "activityNo": 3,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a;\n\t\n\tif (a % 2 == 0){\n\t\tcout << \"Even\";\n\t}else {\n\t\tcout << \"Odd\";\n\t}\n\t\n\treturn 0;\n}",
+    "id": 34
+}, {
+    "chapter": 4,
+    "activityNo": 2,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a;\n\t\n\tif (a > 10){\n\t\tcout << a*a;\n\t}else {\n\t\tcout << a*a*a;\n\t}\n\t\n\treturn 0;\n}",
+    "id": 35
+}]

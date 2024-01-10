@@ -20,6 +20,10 @@ let users = [];
 readDataFromFile();
 // readActivitiesFromFile();
 
+function getuserFromUserId ( id ) {
+  return users.find( user => user.userId == id );
+}
+
 async function saveToken(token, tokenLife, userId) {
   fs.readFile(__dirname + '/api/token.json', 'utf8', function readFileCallback(err, data) {
     if (err) {
@@ -136,6 +140,10 @@ async function readDataFromFile() {
       console.log(err);
     }
     codes = JSON.parse(data);
+    codes.forEach( code => {
+      code.author = getuserFromUserId(code.userId) && getuserFromUserId(code.userId).username
+
+    })
   });
   fs.readFile(__dirname + '/api/users.json', 'utf8', function(err, data) {
     if (err) {
@@ -149,6 +157,9 @@ async function readDataFromFile() {
     }
     // console.log("activities" + activities);
     activities = JSON.parse(data);
+    activities.forEach( activity => {
+      activity.author = getuserFromUserId(activity.userId).username
+    })
   });
 }
 
@@ -254,16 +265,6 @@ function writeCodesToFile(dataToUpdate, isNew) {
 
         let foundExisting;
         do {
-          //let foundExisting = false;
-          // console.log("testing Id: " + testId);
-          // for (index = 0; index < obj.length; index++) {
-          //   if (obj[index].id == testId) {
-          //     console.log(`test Id already exists at obj[${index}].id: ` + obj[index].id);
-          //     foundExisting = true;
-          //     break;
-          //   }
-          // }
-
           foundExisting = obj.find(x => {
             return x.id == testId;
           });
@@ -274,6 +275,7 @@ function writeCodesToFile(dataToUpdate, isNew) {
         } while (foundExisting)
 
         dataToUpdate.id = testId;
+        dataToUpdate.userId = req.user.userId
         // console.log(`id assigned is = ${testId}`);
         obj.push(dataToUpdate);
         json = JSON.stringify(obj);
@@ -293,10 +295,8 @@ function writeCodesToFile(dataToUpdate, isNew) {
       } else {
         const indexToUpdate = getIndexByIdOfCodes(dataToUpdate.id);
         obj = JSON.parse(data); //now it an object
-
         objIndex = obj.findIndex((obj => obj.id == indexToUpdate));
         obj[objIndex] = dataToUpdate;
-
         json = JSON.stringify(obj); //convert it back to json
         fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
           if (err) {
@@ -344,8 +344,8 @@ function writeActivityToFile(dataToUpdate, isNew) {
           }
 
         } while (foundExisting)
-
         dataToUpdate.id = testId;
+        dataToUpdate.userId = req.user.userId
         obj.push(dataToUpdate);
         json = JSON.stringify(obj);
         fs.writeFile(__dirname + '/api/activities.json', json, 'utf8', err => {
@@ -447,6 +447,7 @@ app.use( async function ( req, res, next ) {
     }
   }
   jwt.verify(token, config.secret, async function(err, decoded) {
+
     if (err) {
       if(!allowedURLs.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
         return res.status(401).send("Failed to authenticate token");
@@ -465,6 +466,8 @@ app.use( async function ( req, res, next ) {
       if ( !isTokenPresent( token, decoded.tokenLife, decoded.userId ) ) {
         return res.status(401).send("Invalid token");
       }
+      req.user = getuserFromUserId(decoded.userId);
+      
       next();
     }
   });
@@ -565,6 +568,8 @@ app.get('/codes/:id', (req, res) => {
       if (!code) {
         res.status(404).send("Invalid id or the id was not found.");
       }
+      const user = code && code.userId && getuserFromUserId(code.userId);
+      code.author = user && user.username;
       res.send(code);
     });
 });
@@ -594,7 +599,7 @@ app.get('/activities/', (req, res) => {
 app.post('/save/', (req, res) => {
   let isNew = req.query.new;
   let type = req.query.type;
-  // console.log("type: " + type);
+  // console.log("type: " + type);  
 
   if (type == "codes") {
     writeCodesToFile(req.body, isNew);

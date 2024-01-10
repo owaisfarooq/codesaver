@@ -166,22 +166,43 @@ function makeCards() {
 
     for (let col = 0; col <= 3 && i < data.length; col++) {
 
-      var card = `
-                <div id="cardId${data[i].id}" class="col-sm-3">
-                    <div class="card" id="card${data[i].id}">
-                        <div id="card-heading-${data[i].id}" class="card-header">
-                            ${data[i].language}
-                        </div>
-                        
-                        <div class="card-body">
-                            <h5 class="card-title">${data[i].author}</h5>
-                            <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
-                            <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                            <a class="btn btn-success" href="${url}/view?id=${data[i].id}&type=codes">View</a>
-                        </div>
-                    </div>
+      if ( auth ) {
+        var card = `
+          <div id="cardId${data[i].id}" class="col-sm-3">
+            <div class="card" id="card${data[i].id}">
+                <div id="card-heading-${data[i].id}" class="card-header">
+                    ${data[i].language}
                 </div>
-            `;
+                
+                <div class="card-body">
+                    <h5 class="card-title">${data[i].author}</h5>
+                    <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
+                    <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
+                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}&type=codes">View</a>
+                    <a class="btn btn-success" href="${url}/edit?id=${data[i].id}&type=codes">Edit</a>
+                    <a class="btn btn-danger" onclick="deleteCard(${data[i].id})">Delete</a>
+                </div>
+            </div>
+          </div>
+        `;
+      } else {
+        var card = `
+          <div id="cardId${data[i].id}" class="col-sm-3">
+            <div class="card" id="card${data[i].id}">
+                <div id="card-heading-${data[i].id}" class="card-header">
+                    ${data[i].language}
+                </div>
+                
+                <div class="card-body">
+                    <h5 class="card-title">${data[i].author}</h5>
+                    <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
+                    <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
+                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}&type=codes" >View</a>
+                </div>
+            </div>
+          </div>
+        `;
+      }
       // console.log(`card made with id = ${data[i].id} and i = ${i}`);
       row += card;
       i++;

@@ -8,6 +8,25 @@ var activitiesByChapter = [];
 let noActivitiesByChapter = 0;
 const currentUrl = window.location.href;
 
+function filterLink(chapterNo) {
+  if (auth == "true") {
+    if (!chapterNo) {
+      window.location.replace(url + 'lab-activities/' + "?auth=true");
+    } else {
+      window.location.replace(url + 'lab-activities/?filter=' + chapterNo + "&auth=true");
+
+    }
+  } else {
+    if (!chapterNo) {
+      window.location.replace(url + 'lab-activities/');
+    } else {
+      window.location.replace(url + 'lab-activities/?filter=' + chapterNo);
+
+    }
+
+  }
+}
+
 function getheaders () {
   return {
     "Content-Type":"application/json",
@@ -107,6 +126,17 @@ function filterByChapter(chapterNo) {
   }
 }
 
+function deleteCard(id) {
+  fetch(url + 'delete/?cardId=' + id, {
+    headers: getheaders(),
+    method: 'DELETE'
+  });
+  card = document.getElementById('cardId' + id);
+  card.style.display = 'none';
+  openToast("Deleted card ", id, "red");
+  getData();
+}
+
 function makeCards() {
   const mainBody = document.getElementById("main-body");
 
@@ -139,22 +169,23 @@ function makeCards() {
       for (let col = 0; col <= 3 && i < data.length; col++) {
 
         var card = `
-                  <div id="cardId${data[i].id}" class="col-sm-3">
-                      <div class="card" id="card${data[i].id}">
-                          <div id="card-heading-${data[i].id}" class="card-header">
-                              chapter: ${data[i].chapter}
-                          </div>
-                          
-                          <div class="card-body">
-                              <h5 class="card-title"> activity no. ${data[i].activityNo}</h5>
-                              <textarea id="code${data[i].id}" class="card-text code-text">${data[i].code}</textarea>
-                              <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                              <a class="btn btn-success" href="${url}/view?id=${data[i].id}+&type=activities">View</a>
-                              <a class="btn btn-success" href="${url}/edit?id=${data[i].id}+&type=activities">Edit</a>
-                          </div>
-                      </div>
-                  </div>
-              `;
+          <div id="cardId${data[i].id}" class="col-sm-3">
+            <div class="card" id="card${data[i].id}">
+              <div id="card-heading-${data[i].id}" class="card-header">
+                ${data[i].author}
+              </div>
+              
+              <div class="card-body">
+                <h5 class="card-title">chapter: ${data[i].chapter}</h5>
+                <textarea id="code${data[i].id}" class="card-text code-text">Activity No: ${data[i].activityNo}</textarea>
+                <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
+                <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}+&type=activities">View</a>
+                <a class="btn btn-success" href="${url}/edit?id=${data[i].id}+&type=activities">Edit</a>
+                <a class="btn btn-danger" onclick="deleteCard(${data[i].id})">Delete</a>
+              </div>
+            </div>
+          </div>
+          `;
         // console.log(`card made with id = ${data[i].id} and i = ${i}`);
         row += card;
         i++;
@@ -173,21 +204,21 @@ function makeCards() {
       for (let col = 0; col <= 3 && i < data.length; col++) {
 
         var card = `
-                  <div id="cardId${data[i].id}" class="col-sm-3">
-                      <div class="card" id="card${data[i].id}">
-                          <div id="card-heading-${data[i].id}" class="card-header">
-                              chapter: ${data[i].chapter}
-                          </div>
-                          
-                          <div class="card-body">
-                              <h5 class="card-title"> activity no. ${data[i].activityNo}</h5>
-                              <textarea id="code${data[i].id}" class="card-text code-text">${data[i].code}</textarea>
-                              <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                              <a class="btn btn-success" href="${url}/view?id=${data[i].id}+&type=activities">View</a>
-                          </div>
-                      </div>
-                  </div>
-              `;
+          <div id="cardId${data[i].id}" class="col-sm-3">
+            <div class="card" id="card${data[i].id}">
+              <div id="card-heading-${data[i].id}" class="card-header">
+                ${data[i].author}
+              </div>
+              
+              <div class="card-body">
+                <h5 class="card-title">chapter: ${data[i].chapter}</h5>
+                <textarea id="code${data[i].id}" class="card-text code-text">Activity No: ${data[i].activityNo}</textarea>
+                <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
+                <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}+&type=activities">View</a>
+              </div>
+            </div>
+          </div>
+      `;
         // console.log(`card made with id = ${data[i].id} and i = ${i}`);
         row += card;
         i++;

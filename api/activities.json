@@ -34,12 +34,12 @@
     "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint rectangle(int x, int y) {\n\tint z = x*y;\n\treturn z;\n}\t\nint main() {\n\tint a, b;\n\tcout<<\"Enter the length of rectangle: \";\n\tcin>>a;\n\tcout<<\"\\nEnter the width of rectangle: \";\n\tcin>>b;\n\tcout<<\"\\nThe area is \"<<rectangle(a,b);\n\treturn 0;\n}",
     "id": 4
 }, {
+    "id": 5,
     "chapter": 6,
     "activityNo": 1,
     "userId": 2,
     "author": "rae",
-    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint sum(int x, int y);\nint main() {\n\tint a, b;\n\tcout<<\"\\nEnter two integers:\";\n\tcin>>a>>b;\n\tcout<<\"\\nSum= \"<<sum(a,b);\n}\nint sum(int x, int y) {\n\treturn x+y;\n}\n",
-    "id": 5
+    "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint sum(int x, int y) {\n\treturn x+y;\n}\nint main() {\n\tint a, b;\n\tcout<<\"\\nEnter two integers:\";\n\tcin>>a>>b;\n\tcout<<\"\\nSum= \"<<sum(a,b);\n}\n"
 }, {
     "chapter": 5,
     "activityNo": 4,
@@ -51,14 +51,14 @@
     "chapter": 6,
     "activityNo": 6,
     "userId": 2,
-    "author": "RAE",
+    "author": "rae",
     "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint table(int x) {\n\tcout<<\"\\nTable is:\"<<endl;\n\tfor (int i=1;i<=10;i++)\n\t\tcout<<x<<\"x\"<<i<<\"=\"<<x*i<<endl;\n\treturn 0;\n}\nint main() {\n\tint a;\n\tcout<<\"\\nEnter an integer for table:\";\n\tcin>>a;\n\ttable(a);\n\tgetch();\n}",
     "id": 8
 }, {
     "chapter": 6,
     "activityNo": 4,
     "userId": 2,
-    "author": "RAE",
+    "author": "rae",
     "code": "#include<iostream>\n#include<conio.h>\nusing namespace std;\nint area(int x) {\n\tint z = x*x;\n\treturn z;\n}\n\nint peri(int x) {\n\tint z = 4*x;\n\treturn z;\n}\n\nint main() {\n\tint a;\n\tcout<<\"\\nEnter the length of one side of the square: \";\n\tcin>>a;\n\tcout<<\"\\nArea is \"<<area(a);\n\tcout<<\"\\nPerimeter is \"<<peri(a);\n\treturn 0;\n}",
     "id": 9
 }, {
@@ -160,12 +160,12 @@
     "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main (){\n\tint length, breadth, area;\n\t\n\tcout << \"Enter the length: \\n\";\n\tcin >> length;\n\t\n\tcout << \"Enter the breadth: \\n\";\n\tcin >> breadth;\n\t\n\tarea = length * breadth;\n\t\t\n\tcout << \"Area = \" << area << endl;\n\t\t\n\tgetch();\n\treturn 0;\n}",
     "id": 22
 }, {
+    "id": 23,
     "chapter": 3,
     "activityNo": 4,
     "userId": 1,
     "author": "Owais",
-    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main () {\n\tfloat tempF, tempC;\n\n\tcout << \"Enter temperature in fahrenheit: \";\n\tcin >> tempF;\n\t\n\ttempC = (5.0/9.0)*(tempF - 32);\n\t\n\tcout << \"temperature in celcuis= \" << tempC;\n\t\t\n\tgetch();\n\treturn 0;\n}",
-    "id": 23
+    "code": "#include <iostream>\n#include <stdio.h>\n#include <conio.h>\nusing namespace std;\n\nint main () {\n\tfloat tempF, tempC;\n\n\tcout << \"Enter temperature in fahrenheit: \";\n\tcin >> tempF;\n\t\n\ttempC = (5.0/9.0)*(tempF - 32);\n\t\n\tcout << \"temperature in celcuis= \" << tempC;\n\t\t\n\tgetch();\n\treturn 0;\n}"
 }, {
     "chapter": 4,
     "activityNo": 12,
@@ -226,6 +226,7 @@
     "chapter": 4,
     "activityNo": 4,
     "userId": 1,
+    "userId": 1,
     "author": "Owais",
     "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a, b, c, largest;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a >> b >> c;\n\t\n\tif (a > b && a > c){\n\t\tlargest = a;\n\t}\n\tif (b > a && b > c){\n\t\tlargest = b;\n\t}else {\n\t\tlargest = c;\n\t}\n\t\n\tcout << \"Largest = \" << largest;\n\t\n\treturn 0;\n}",
     "id": 33
@@ -243,4 +244,11 @@
     "author": "Owais",
     "code": "#include <iostream>\n\nusing namespace std;\n\nint main (){\n\tint a;\n\t\n\tcout << \"Enter three characters: \";\n\tcin >> a;\n\t\n\tif (a > 10){\n\t\tcout << a*a;\n\t}else {\n\t\tcout << a*a*a;\n\t}\n\t\n\treturn 0;\n}",
     "id": 35
+}, {
+    "chapter": 41,
+    "activityNo": 23,
+    "userId": 1,
+    "author": "Owais",
+    "code": "class category:\n    def __init__(self, categoryName, stickers):\n        self.categoryName = categoryName\n        self.stickers = stickers\n\nclass sticker:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n        \n\nlistOfStickerCategories = []\nlistOfStickerCategories.append(\n    category('animals', \n             [\n                 sticker('monkey', 150),\n                 sticker('birds', 250),\n                 sticker('cats', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('anime',  \n             [\n                 sticker('AOT', 150),\n                 sticker('Demon Slayer', 250),\n                 sticker('Black Clover', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('cars',  \n             [sticker('Volvo', 150), \n              sticker('Suzuki', 250), \n              sticker('Nissan', 50), \n              sticker('Toyota', 50)\n              ]\n             ))\n\nfor category in listOfStickerCategories:\n    #print(category)\n    print(\"stickers in \" , category.categoryName , \" are: \")\n    for sticker in category.stickers:\n        print(sticker.name, end=\", \")\n    print(\"\\n\")",
+    "id": 24
 }]

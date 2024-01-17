@@ -1,1 +1,185 @@
-[{"title":"workshop","userId":1,"author":"Owais","language":"Python","code":"class category:\n    def __init__(self, categoryName, stickers):\n        self.categoryName = categoryName\n        self.stickers = stickers\n\nclass sticker:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n        \n\nlistOfStickerCategories = []\nlistOfStickerCategories.append(\n    category('animals', \n             [\n                 sticker('monkey', 150),\n                 sticker('birds', 250),\n                 sticker('cats', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('anime',  \n             [\n                 sticker('AOT', 150),\n                 sticker('Demon Slayer', 250),\n                 sticker('Black Clover', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('cars',  \n             [sticker('Volvo', 150), \n              sticker('Suzuki', 250), \n              sticker('Nissan', 50), \n              sticker('Toyota', 50)\n              ]\n             ))\n\nfor category in listOfStickerCategories:\n    #print(category)\n    print(\"stickers in \" , category.categoryName , \" are: \")\n    for sticker in category.stickers:\n        print(sticker.name, end=\", \")\n    print(\"\\n\")","version":"0","id":1},{"id":2,"version":2,"title":"lab tasks","language":"CPP","userId":1,"author":"owais","code":"#include <iostream>\nusing namespace std;\nvoid main()\n{\n\tint num;\n\tcout << \"Enter the number\";\n\tcin >> num;\n\tint ans = ((num*2+6)/2)-num;\n\tcout << ans;\n}"},{"title":"lab tasks","userId":1,"author":"Owais","language":"CPP","code":"#include <iostream>\nusing namespace std;\nvoid main() {\n\tfloat sub1, sub2, sub3, sub4, sub5;\n\tfloat total = 0;\n\tcout << \"Enter the numbers\";\n\tcin >> sub1 >> sub2 >> sub3 >> sub4 >> sub5;\n\ttotal = sub1 + sub2 + sub3 + sub4 + sub5;\n\tfloat avg = total / 5.0;\n\tcout << \"\\n avg: \" << avg;\n}","version":"4","id":3},{"title":"lab tasks","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nvoid main () {\n\tfloat a, b, c;\n\tcout << \"Enter three numbers\";\n\tcin >> a >> b >> c;\n\tfloat ans = (a*a + b*b + c*c) +2*(a*b + b*c + c*a);\n\tcout << ans;\n}","version":"7","id":4},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat radius, height;\n\tcout << \"Enter the radius and the height: \";\n\tcin >> radius >> height;\n\tcout << \"\\nVoulume: \" << (1.0/3.0)*3.141*radius*radius*height;\n\treturn 0;\n}","version":"1","id":6},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num1, num2, num3, num4, num5;\n\tcout << \"Enter 5 numbers: \";\n\tcin >> num1 >> num2 >> num3 >> num4 >> num5;\n    float sum = num1 + num2 + num3 + num4 + num5;\n    float product = num1 * num2 * num3 * num4 * num5;\n\tcout << \"\\sum: \" << sum << endl\n\t<< \"average: \" << sum/5.0 << endl\n\t<< \"product: \" << product;\n\treturn 0;\n}","version":"3","id":7},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num1, num2;\n\tcout << \"Enter 2 numbers: \";\n\tcin >> num1 >> num2;\n    float reminder = num1 % num2;\n    float qoutient = num1 / num2;\n    cout << \"\\nreminder: \" << reminder << endl\n\t<< \"qoutient: \" << qoutient << endl;\n\treturn 0;\n}","version":"5","id":8},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num;\n\tcout << \"Enter a number: \";\n\tcin >> num;\n\tcout << ((num*2)+10)/2 - num;\n\treturn 0;\n}","version":"6","id":9},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat num1, num2, num3;\n\tcout << \"Enter 3 numbers: \";\n\tcin >> num1 >> num2 >> num3;\n    cout << \"\\nresult: \" << (num1*num1) + (num2*num2) + (num3*num3);\n\treturn 0;\n}","version":"8","id":10},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat a, b;\n\tcout << \"Enter 2 numbers: \";\n\tcin >> a >> b;\n    cout << \"\\nx= \" << a*a + 2*a*b + b*b;\n\treturn 0;\n}","version":"9","id":11},{"title":"lab activites","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat a;\n\tcout << \"Enter a non zero number: \";\n\tcin >> a;\n\tif ( a == 0 ) {\n\t    return 1;\n\t}\n\tdouble reciprocal = 1.0 / a;\n    cout << \"\\nreciprocal= \" << reciprocal;\n\treturn 0;\n}","version":"10","id":12},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint a, b;\n\tcout << \"Enter two single digit numbers: \";\n\tcin >> a >> b;\n\tfloat ans = ((a*2+5)*5)+b-4-21;\n    cout << \"\\nans= \" << ans;\n\treturn 0;\n}","version":"11","id":13},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character: \";\n\tcin >> a;\n    cout << (char)((int)a - 32);\n\treturn 0;\n}","version":"12","id":14},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character: \";\n\tcin >> a;\n    cout << (int)a;\n\treturn 0;\n}","version":"13","id":15},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character from (0-9): \";\n\tcin >> a;\n\tcout << a - '0';\n    cout << (int)a-48;\n\treturn 0;\n}","version":"14","id":16},{"title":"lab activities","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint inches;\n\tcout << \"Enter the number of inches: \";\n\tcin >> inches;\n\tconst int feet = inches / 12;\n\tint remainingInches = inches%12;\n\tcout << \"\\t\\t\" << inches << \" inches = \" << feet << \" feet \" << remainingInches << \" inches\";\n\treturn 0;\n}","version":"15","id":17},{"title":"lab activities","author":"owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main () {\n\tint minutes;\n\tcout << \"Enter the minutes: \";\n\tcin >> minutes;\n\tconst int hour = minutes / 60;\n\tint remainingMinutes = minutes % 60;\n\tcout << \"\\t\\t\" << minutes << \" minutes = \" << hour << \" hour \" << remainingMinutes << \" minutes\";\n\treturn 0;\n}","version":"16","id":18},{"title":"lab","author":"Owais","userId":1,"language":"CPP","code":"#include <iostream>\nusing namespace std;\n\nint main() {\n\tint marks[5] = {};\n\tint total = 0;\n\tfor (int i = 0; i < sizeof(marks)/4; i++) {\n\t\tint markOfSubject;\n\t\tcout << \"Enter marks of subject \" << i+1 << \": \";\n\t\tcin >> markOfSubject;\n\t\ttotal += markOfSubject;\n\t\tsystem(\"cls\");\n\t}\n\tfloat avg = total / sizeof(marks)/4;\n\tcout << \"avg: \" << avg;\n\treturn 0;\n}","version":"4.1","id":19},{"id":20,"title":"PROJECT SEAA","language":"CPP","userId":1,"author":"Sareen","code":"#include<iostream>\n#include<conio.h>\n#include<stdlib.h>\n#include<windows.h>\n\nusing namespace std;\nint main()\n{\n\n\tint optionSelected;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) quit\" << endl;\n\tcin >> optionSelected;\n\tsystem(\"CLS\");\n\tswitch (optionSelected) {\n\tcase 1:\n\t{\n\t\tchar userAnswer;\n\t\tcout << \"You are in the jungle\" << endl;\n\n\t\tcout << \"THE GHOST WILL LET YOU GO IF YOU'LL ANSWER THESE QUESTIONS CORRECTLY OR YOU'LL DIE\" << endl;\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\t\t\n\t\t_getch(); // to wait for input \n\t\tsystem(\"CLS\");//to clear screen\n\t\t\n\t\t\n\t\tcout << \"When Pakistan came into being?\" << endl;\n\t\tcout << \"a)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\" << endl;\n\t\tcin >> userAnswer;\n\t\tif (userAnswer == 'a') {\n\t\t\tcout << \"Answer is correct\" << endl;\n\t\t}\n\t\telse {\n\t\t\tcout << \"Wrong answer YOU DIEDDDDDDDDDD\" << endl;\n\t\t}\n\t\tbreak;\n\t}\n\t\t\n\tcase 2:\n\t\tcout << \"Sareen\" << endl;\n\t\tcout << \"Aliha\" << endl;\n\t\tcout << \"Eman\" << endl;\n\t\tcout << \"Afia\" << endl;\n\t\tbreak;\n\t}\n\treturn 0;\n}","version":"1"},{"title":"Project SEAA","author":"Sareen/Aliha","language":"CPP","userId":1,"code":"#include<iostream>\n#include<conio.h>\n#include<stdlib.h>\n#include<windows.h>\n\nusing namespace std;\nint main()\n{\n\n\tint optionSelected;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) quit\" << endl;\n\tcin >> optionSelected;\n\tsystem(\"CLS\");\n\tswitch (optionSelected) {\n\tcase 1:\n\t{\n\t\tchar userAnswer;\n\t\tcout << \"You are in the forest\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"You get lost in the forest\" << endl;\n\t\tSleep(3000);\n\t\tcout<< \"You meet a ghost\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"The Ghost gives you 10 tasks to complete\" << endl;\n\t\tSleep(3000);\n        cout << \"If you miss any two tasks you'll end up staying in the forest forever\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"if you complete all these tasks you can leave the forest\" << endl;\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\n\t\t_getch(); // to wait for input \n\t\tsystem(\"CLS\");//to clear screen\n\n\n\t\tcout << \"When Pakistan came into being?\" << endl;\n\t\tcout << \"a)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\" << endl;\n\t\tcin >> userAnswer;\n\t\tif (userAnswer == 'a') {\n\t\t\tcout << \"Answer is correct\" << endl;\n\t\t}\n\t\telse {\n\t\t\tcout << \"Wrong answer YOU DIEDDDDDDDDDD\" << endl;\n\t\t}\n\t\tbreak;\n\t}\n\n\tcase 2:\n\t\tcout << \"Sareen\" << endl;\n\t\tcout << \"Aliha\" << endl;\n\t\tcout << \"Eman\" << endl;\n\t\tcout << \"Afia\" << endl;\n\t\tbreak;\n\t}\n\treturn 0;\n}","version":"2","id":21},{"title":"SEAA","author":"AFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","userId":1,"language":"CPP","code":"#include <iostream>\n#include <conio.h>\n#include< stdlib.h >\nusing namespace std;\nvoid displayMenu() { //made a menu function here\n    cout << \"YOU ARE LOST IN THE JUNGLE AND A GHOST IS CHASING YOU.\\nhowever, you have the option to find your way out by playing a quiz game.\\nif you pass, YOU SUCCEED!\\nif you fail,YOU LOSE! and the ghost will capture you\\n\" << endl;\n    cout << \"Quiz Game Menu:\\n\" << endl;\n    cout << \"1--->\\t*play game\\n\" << endl;\n    cout << \"2--->\\t*instructions\\n\" << endl;\n    cout << \"3--->\\t*Credentials\\n\" << endl;\n    cout << \"4--->\\t*Exit\\n\" << endl;\n}\n\nint main() {\n    char count;\n\n    do {\n        displayMenu(); //using the menu function\n        count = _getch(); \n        system(\"CLS\");\n        switch (count) {\n        case '1':\n            cout << \"LET THE GAMES BEGIN!!!\" << endl;\n            // yahan game ka sara code ajaye ga\n            break;\n\n        case '2':\n            cout << \"Instructions:\" << endl;\n            cout <<\"you may answer 8 out of the 10 given questions correctly inorder to make it out of the jungle! Answer the questions from the provided options to the best of your ability!\" << endl;\n         \n            break;\n\n        case '3':\n            cout << \"Credentials:\" << endl;\n            cout << \"NAMES & ROLL NO.--->\\n1.Eman Rohail:23576\\n2.Afia Eman:232557\\n3.Sareen Abbassi:232533\\n4.Aliha:232574\\n\" << endl;\n            break;\n\n        case '4':\n            cout << \"Exiting the Quiz Game.\\nthanks for playing!\" << endl;\n            break;\n\n        default:\n            cout << \"Invalid choice. Please choose a valid option.\" << endl;\n        }\n        cout << \"Press any key to continue...\";\n        _getch(); \n        system(\"cls\");\n\n    } while (count != '4');\n\n    return 0;\n}","version":"2.1","id":22},{"title":"SEAA","author":"Sareen / Afia","language":"CPP","userId":1,"code":"#include<iostream>\n#include<conio.h>\n#include<windows.h>\n#include<string>\nusing namespace std;\n\nint lives = 2;\n\nbool askQuestion(string question, string options, char correctOption) {\n\tchar userAnswer;\n\tcout << question << endl;\n\tcout << options << endl;\n\n\tcin >> userAnswer;\n\n\tif (userAnswer == correctOption) {\n\t\tcout << \"Hurrrah!\";\n\t}\n\telse {\n\t\tlives--;\n\t\tcout << \"Wrong Answer\";\n\t}\n\n\tif (lives == 0) {\n\t\tsystem(\"CLS\"); // to clear screen\n\t\tcout << \"YOU HAVE DIEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\";\n\t\t_getch();\n\t\tsystem(\"CLS\"); // to clear screen\n\t\treturn true;\n\t}\n\n\tcout << \"\\n\\n\\n\\n\\nPress any key to continue...\";\n\t_getch();\n\tsystem(\"CLS\"); // to clear screen\n\treturn false;\n}\n\n\nint displayMenu() {\n\tint optionSelected;\n\tcout << \"Quiz Game Menu:\\n\" << endl;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) instructions\\n4) quit\" << endl;\n\tcin >> optionSelected;\n\treturn optionSelected;\n}\n\n\nint main() {\n\tint optionSelected;\n\tdo {\n\t\toptionSelected = displayMenu();\n\t\tsystem(\"CLS\"); // to clear screen\n\n\t\tswitch (optionSelected) {\n\t\tcase 1: {\n\n\t\t\tcout << \"You are in the forest\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"You get lost in the forest\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"You meet a ghost\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"The Ghost gives you 10 tasks to complete\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"If you miss any two tasks you'll end up staying in the forest forever\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"if you complete all these tasks you can leave the forest\" << endl;\n\t\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\t\t\t_getch();\n\t\t\tsystem(\"CLS\");\n\n\t\t\tif (askQuestion(\"When did Pakistan came into being?\", \"\\na)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\", 'a')) {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tif (askQuestion(\"What is the name of Afia's cat\", \"\\na)Aliha\\t\\tb)Rio\\nc)Bhatti\\td)Saleh\", 'b')) {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tbreak;\n\t\t}\n\n\t\tcase 2:\n\t\t\tcout << \"Credits\\n\\n\";\n\t\t\tcout << \"Sir Danish\" << endl;\n\t\t\tcout << \"Maam Asra\" << endl;\n\t\t\tcout << \"Wajdan (mentor)\" << endl << endl << endl;\n\t\t\tcout << \"NAMES & ROLL NO.\\n\\n\\n1.Eman Rohail:23576\\n2.Afia Eman:232557\\n3.Sareen Abbassi:232533\\n4.Aliha:232574\\n\" << endl;\n\t\t\tbreak;\n\t\tcase 3:\n\t\t\tcout << \"Instructions:\" << endl;\n\t\t\tcout << \"you may answer 8 out of the 10 given questions correctly inorder to make it out of the jungle! Answer the questions from the provided options to the best of your ability!\" << endl;\n\n\t\t\tbreak;\n\n\t\tcase 4:\n\t\t\tcout << \"Thanks for playing\";\n\t\t\tbreak;\n\n\t\tdefault:\n\t\t\tcout << \"Invalid choice please choose a valid option\";\n\t\t}\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue...\";\n\t\t_getch();\n\t\tsystem(\"CLS\");\n\n\t} while (optionSelected != 4);\n\n\treturn 0;\n}","version":"3","id":23}]
+[{
+    "title": "workshop",
+    "userId": 1,
+    "author": "Owais",
+    "language": "Python",
+    "code": "class category:\n    def __init__(self, categoryName, stickers):\n        self.categoryName = categoryName\n        self.stickers = stickers\n\nclass sticker:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n        \n\nlistOfStickerCategories = []\nlistOfStickerCategories.append(\n    category('animals', \n             [\n                 sticker('monkey', 150),\n                 sticker('birds', 250),\n                 sticker('cats', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('anime',  \n             [\n                 sticker('AOT', 150),\n                 sticker('Demon Slayer', 250),\n                 sticker('Black Clover', 50)\n                 ]\n             ))\nlistOfStickerCategories.append(\n    category('cars',  \n             [sticker('Volvo', 150), \n              sticker('Suzuki', 250), \n              sticker('Nissan', 50), \n              sticker('Toyota', 50)\n              ]\n             ))\n\nfor category in listOfStickerCategories:\n    #print(category)\n    print(\"stickers in \" , category.categoryName , \" are: \")\n    for sticker in category.stickers:\n        print(sticker.name, end=\", \")\n    print(\"\\n\")",
+    "version": "0",
+    "id": 1
+}, {
+    "id": 2,
+    "version": 2,
+    "title": "lab tasks",
+    "language": "CPP",
+    "userId": 1,
+    "author": "owais",
+    "code": "#include <iostream>\nusing namespace std;\nvoid main()\n{\n\tint num;\n\tcout << \"Enter the number\";\n\tcin >> num;\n\tint ans = ((num*2+6)/2)-num;\n\tcout << ans;\n}"
+}, {
+    "title": "lab tasks",
+    "userId": 1,
+    "author": "Owais",
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\nvoid main() {\n\tfloat sub1, sub2, sub3, sub4, sub5;\n\tfloat total = 0;\n\tcout << \"Enter the numbers\";\n\tcin >> sub1 >> sub2 >> sub3 >> sub4 >> sub5;\n\ttotal = sub1 + sub2 + sub3 + sub4 + sub5;\n\tfloat avg = total / 5.0;\n\tcout << \"\\n avg: \" << avg;\n}",
+    "version": "4",
+    "id": 3
+}, {
+    "title": "lab tasks",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nvoid main () {\n\tfloat a, b, c;\n\tcout << \"Enter three numbers\";\n\tcin >> a >> b >> c;\n\tfloat ans = (a*a + b*b + c*c) +2*(a*b + b*c + c*a);\n\tcout << ans;\n}",
+    "version": "7",
+    "id": 4
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat radius, height;\n\tcout << \"Enter the radius and the height: \";\n\tcin >> radius >> height;\n\tcout << \"\\nVoulume: \" << (1.0/3.0)*3.141*radius*radius*height;\n\treturn 0;\n}",
+    "version": "1",
+    "id": 6
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num1, num2, num3, num4, num5;\n\tcout << \"Enter 5 numbers: \";\n\tcin >> num1 >> num2 >> num3 >> num4 >> num5;\n    float sum = num1 + num2 + num3 + num4 + num5;\n    float product = num1 * num2 * num3 * num4 * num5;\n\tcout << \"\\sum: \" << sum << endl\n\t<< \"average: \" << sum/5.0 << endl\n\t<< \"product: \" << product;\n\treturn 0;\n}",
+    "version": "3",
+    "id": 7
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num1, num2;\n\tcout << \"Enter 2 numbers: \";\n\tcin >> num1 >> num2;\n    float reminder = num1 % num2;\n    float qoutient = num1 / num2;\n    cout << \"\\nreminder: \" << reminder << endl\n\t<< \"qoutient: \" << qoutient << endl;\n\treturn 0;\n}",
+    "version": "5",
+    "id": 8
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint num;\n\tcout << \"Enter a number: \";\n\tcin >> num;\n\tcout << ((num*2)+10)/2 - num;\n\treturn 0;\n}",
+    "version": "6",
+    "id": 9
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat num1, num2, num3;\n\tcout << \"Enter 3 numbers: \";\n\tcin >> num1 >> num2 >> num3;\n    cout << \"\\nresult: \" << (num1*num1) + (num2*num2) + (num3*num3);\n\treturn 0;\n}",
+    "version": "8",
+    "id": 10
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat a, b;\n\tcout << \"Enter 2 numbers: \";\n\tcin >> a >> b;\n    cout << \"\\nx= \" << a*a + 2*a*b + b*b;\n\treturn 0;\n}",
+    "version": "9",
+    "id": 11
+}, {
+    "title": "lab activites",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tfloat a;\n\tcout << \"Enter a non zero number: \";\n\tcin >> a;\n\tif ( a == 0 ) {\n\t    return 1;\n\t}\n\tdouble reciprocal = 1.0 / a;\n    cout << \"\\nreciprocal= \" << reciprocal;\n\treturn 0;\n}",
+    "version": "10",
+    "id": 12
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint a, b;\n\tcout << \"Enter two single digit numbers: \";\n\tcin >> a >> b;\n\tfloat ans = ((a*2+5)*5)+b-4-21;\n    cout << \"\\nans= \" << ans;\n\treturn 0;\n}",
+    "version": "11",
+    "id": 13
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character: \";\n\tcin >> a;\n    cout << (char)((int)a - 32);\n\treturn 0;\n}",
+    "version": "12",
+    "id": 14
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character: \";\n\tcin >> a;\n    cout << (int)a;\n\treturn 0;\n}",
+    "version": "13",
+    "id": 15
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tchar a;\n\tcout << \"Enter a character from (0-9): \";\n\tcin >> a;\n\tcout << a - '0';\n    cout << (int)a-48;\n\treturn 0;\n}",
+    "version": "14",
+    "id": 16
+}, {
+    "title": "lab activities",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint inches;\n\tcout << \"Enter the number of inches: \";\n\tcin >> inches;\n\tconst int feet = inches / 12;\n\tint remainingInches = inches%12;\n\tcout << \"\\t\\t\" << inches << \" inches = \" << feet << \" feet \" << remainingInches << \" inches\";\n\treturn 0;\n}",
+    "version": "15",
+    "id": 17
+}, {
+    "title": "lab activities",
+    "author": "owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main () {\n\tint minutes;\n\tcout << \"Enter the minutes: \";\n\tcin >> minutes;\n\tconst int hour = minutes / 60;\n\tint remainingMinutes = minutes % 60;\n\tcout << \"\\t\\t\" << minutes << \" minutes = \" << hour << \" hour \" << remainingMinutes << \" minutes\";\n\treturn 0;\n}",
+    "version": "16",
+    "id": 18
+}, {
+    "title": "lab",
+    "author": "Owais",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\nusing namespace std;\n\nint main() {\n\tint marks[5] = {};\n\tint total = 0;\n\tfor (int i = 0; i < sizeof(marks)/4; i++) {\n\t\tint markOfSubject;\n\t\tcout << \"Enter marks of subject \" << i+1 << \": \";\n\t\tcin >> markOfSubject;\n\t\ttotal += markOfSubject;\n\t\tsystem(\"cls\");\n\t}\n\tfloat avg = total / sizeof(marks)/4;\n\tcout << \"avg: \" << avg;\n\treturn 0;\n}",
+    "version": "4.1",
+    "id": 19
+}, {
+    "id": 20,
+    "title": "PROJECT SEAA",
+    "language": "CPP",
+    "userId": 1,
+    "author": "Sareen",
+    "code": "#include<iostream>\n#include<conio.h>\n#include<stdlib.h>\n#include<windows.h>\n\nusing namespace std;\nint main()\n{\n\n\tint optionSelected;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) quit\" << endl;\n\tcin >> optionSelected;\n\tsystem(\"CLS\");\n\tswitch (optionSelected) {\n\tcase 1:\n\t{\n\t\tchar userAnswer;\n\t\tcout << \"You are in the jungle\" << endl;\n\n\t\tcout << \"THE GHOST WILL LET YOU GO IF YOU'LL ANSWER THESE QUESTIONS CORRECTLY OR YOU'LL DIE\" << endl;\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\t\t\n\t\t_getch(); // to wait for input \n\t\tsystem(\"CLS\");//to clear screen\n\t\t\n\t\t\n\t\tcout << \"When Pakistan came into being?\" << endl;\n\t\tcout << \"a)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\" << endl;\n\t\tcin >> userAnswer;\n\t\tif (userAnswer == 'a') {\n\t\t\tcout << \"Answer is correct\" << endl;\n\t\t}\n\t\telse {\n\t\t\tcout << \"Wrong answer YOU DIEDDDDDDDDDD\" << endl;\n\t\t}\n\t\tbreak;\n\t}\n\t\t\n\tcase 2:\n\t\tcout << \"Sareen\" << endl;\n\t\tcout << \"Aliha\" << endl;\n\t\tcout << \"Eman\" << endl;\n\t\tcout << \"Afia\" << endl;\n\t\tbreak;\n\t}\n\treturn 0;\n}",
+    "version": "1"
+}, {
+    "title": "Project SEAA",
+    "author": "Sareen/Aliha",
+    "language": "CPP",
+    "userId": 1,
+    "code": "#include<iostream>\n#include<conio.h>\n#include<stdlib.h>\n#include<windows.h>\n\nusing namespace std;\nint main()\n{\n\n\tint optionSelected;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) quit\" << endl;\n\tcin >> optionSelected;\n\tsystem(\"CLS\");\n\tswitch (optionSelected) {\n\tcase 1:\n\t{\n\t\tchar userAnswer;\n\t\tcout << \"You are in the forest\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"You get lost in the forest\" << endl;\n\t\tSleep(3000);\n\t\tcout<< \"You meet a ghost\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"The Ghost gives you 10 tasks to complete\" << endl;\n\t\tSleep(3000);\n        cout << \"If you miss any two tasks you'll end up staying in the forest forever\" << endl;\n\t\tSleep(3000);\n\t\tcout << \"if you complete all these tasks you can leave the forest\" << endl;\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\n\t\t_getch(); // to wait for input \n\t\tsystem(\"CLS\");//to clear screen\n\n\n\t\tcout << \"When Pakistan came into being?\" << endl;\n\t\tcout << \"a)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\" << endl;\n\t\tcin >> userAnswer;\n\t\tif (userAnswer == 'a') {\n\t\t\tcout << \"Answer is correct\" << endl;\n\t\t}\n\t\telse {\n\t\t\tcout << \"Wrong answer YOU DIEDDDDDDDDDD\" << endl;\n\t\t}\n\t\tbreak;\n\t}\n\n\tcase 2:\n\t\tcout << \"Sareen\" << endl;\n\t\tcout << \"Aliha\" << endl;\n\t\tcout << \"Eman\" << endl;\n\t\tcout << \"Afia\" << endl;\n\t\tbreak;\n\t}\n\treturn 0;\n}",
+    "version": "2",
+    "id": 21
+}, {
+    "title": "SEAA",
+    "author": "AFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "userId": 1,
+    "language": "CPP",
+    "code": "#include <iostream>\n#include <conio.h>\n#include< stdlib.h >\nusing namespace std;\nvoid displayMenu() { //made a menu function here\n    cout << \"YOU ARE LOST IN THE JUNGLE AND A GHOST IS CHASING YOU.\\nhowever, you have the option to find your way out by playing a quiz game.\\nif you pass, YOU SUCCEED!\\nif you fail,YOU LOSE! and the ghost will capture you\\n\" << endl;\n    cout << \"Quiz Game Menu:\\n\" << endl;\n    cout << \"1--->\\t*play game\\n\" << endl;\n    cout << \"2--->\\t*instructions\\n\" << endl;\n    cout << \"3--->\\t*Credentials\\n\" << endl;\n    cout << \"4--->\\t*Exit\\n\" << endl;\n}\n\nint main() {\n    char count;\n\n    do {\n        displayMenu(); //using the menu function\n        count = _getch(); \n        system(\"CLS\");\n        switch (count) {\n        case '1':\n            cout << \"LET THE GAMES BEGIN!!!\" << endl;\n            // yahan game ka sara code ajaye ga\n            break;\n\n        case '2':\n            cout << \"Instructions:\" << endl;\n            cout <<\"you may answer 8 out of the 10 given questions correctly inorder to make it out of the jungle! Answer the questions from the provided options to the best of your ability!\" << endl;\n         \n            break;\n\n        case '3':\n            cout << \"Credentials:\" << endl;\n            cout << \"NAMES & ROLL NO.--->\\n1.Eman Rohail:23576\\n2.Afia Eman:232557\\n3.Sareen Abbassi:232533\\n4.Aliha:232574\\n\" << endl;\n            break;\n\n        case '4':\n            cout << \"Exiting the Quiz Game.\\nthanks for playing!\" << endl;\n            break;\n\n        default:\n            cout << \"Invalid choice. Please choose a valid option.\" << endl;\n        }\n        cout << \"Press any key to continue...\";\n        _getch(); \n        system(\"cls\");\n\n    } while (count != '4');\n\n    return 0;\n}",
+    "version": "2.1",
+    "id": 22
+}, {
+    "title": "SEAA",
+    "author": "Sareen / Afia",
+    "language": "CPP",
+    "userId": 1,
+    "code": "#include<iostream>\n#include<conio.h>\n#include<windows.h>\n#include<string>\nusing namespace std;\n\nint lives = 2;\n\nbool askQuestion(string question, string options, char correctOption) {\n\tchar userAnswer;\n\tcout << question << endl;\n\tcout << options << endl;\n\n\tcin >> userAnswer;\n\n\tif (userAnswer == correctOption) {\n\t\tcout << \"Hurrrah!\";\n\t}\n\telse {\n\t\tlives--;\n\t\tcout << \"Wrong Answer\";\n\t}\n\n\tif (lives == 0) {\n\t\tsystem(\"CLS\"); // to clear screen\n\t\tcout << \"YOU HAVE DIEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\";\n\t\t_getch();\n\t\tsystem(\"CLS\"); // to clear screen\n\t\treturn true;\n\t}\n\n\tcout << \"\\n\\n\\n\\n\\nPress any key to continue...\";\n\t_getch();\n\tsystem(\"CLS\"); // to clear screen\n\treturn false;\n}\n\n\nint displayMenu() {\n\tint optionSelected;\n\tcout << \"Quiz Game Menu:\\n\" << endl;\n\tcout << \"1) Play Game\\n2) To Pay Credits\\n3) instructions\\n4) quit\" << endl;\n\tcin >> optionSelected;\n\treturn optionSelected;\n}\n\n\nint main() {\n\tint optionSelected;\n\tdo {\n\t\toptionSelected = displayMenu();\n\t\tsystem(\"CLS\"); // to clear screen\n\n\t\tswitch (optionSelected) {\n\t\tcase 1: {\n\n\t\t\tcout << \"You are in the forest\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"You get lost in the forest\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"You meet a ghost\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"The Ghost gives you 10 tasks to complete\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"If you miss any two tasks you'll end up staying in the forest forever\" << endl;\n\t\t\t_getch();\n\t\t\tcout << \"if you complete all these tasks you can leave the forest\" << endl;\n\t\t\tcout << \"\\n\\n\\n\\nPress any key to continue\" << endl;\n\t\t\t_getch();\n\t\t\tsystem(\"CLS\");\n\n\t\t\tif (askQuestion(\"When did Pakistan came into being?\", \"\\na)1947\\t\\tb)1987\\nc)1950\\t\\td)1949\", 'a')) {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tif (askQuestion(\"What is the name of Afia's cat\", \"\\na)Aliha\\t\\tb)Rio\\nc)Bhatti\\td)Saleh\", 'b')) {\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tbreak;\n\t\t}\n\n\t\tcase 2:\n\t\t\tcout << \"Credits\\n\\n\";\n\t\t\tcout << \"Sir Danish\" << endl;\n\t\t\tcout << \"Maam Asra\" << endl;\n\t\t\tcout << \"Wajdan (mentor)\" << endl << endl << endl;\n\t\t\tcout << \"NAMES & ROLL NO.\\n\\n\\n1.Eman Rohail:23576\\n2.Afia Eman:232557\\n3.Sareen Abbassi:232533\\n4.Aliha:232574\\n\" << endl;\n\t\t\tbreak;\n\t\tcase 3:\n\t\t\tcout << \"Instructions:\" << endl;\n\t\t\tcout << \"you may answer 8 out of the 10 given questions correctly inorder to make it out of the jungle! Answer the questions from the provided options to the best of your ability!\" << endl;\n\n\t\t\tbreak;\n\n\t\tcase 4:\n\t\t\tcout << \"Thanks for playing\";\n\t\t\tbreak;\n\n\t\tdefault:\n\t\t\tcout << \"Invalid choice please choose a valid option\";\n\t\t}\n\t\tcout << \"\\n\\n\\n\\nPress any key to continue...\";\n\t\t_getch();\n\t\tsystem(\"CLS\");\n\n\t} while (optionSelected != 4);\n\n\treturn 0;\n}",
+    "version": "3",
+    "id": 23
+},{
+    "id": 5,
+    "title": "arrange numbers in  ascending order",
+    "language": "CPP",
+    "version": 0,
+    "userId": 1,
+    "author": "Owais",
+    "code": "#include<iostream>\n#include<conio.h>\n#include<stdio.h> \n#include<string>\n\nusing namespace std; \n\nint size = 5;\n\nint intToAscii(int number){\n\treturn '0'+ number;\n}\n\nbool isInAssending(int *arr){\n\t\n\tint largest = arr[0];\n\tfor(int i = 1; i < size; i++){\n\t\tif(arr[i] < largest){\n\t\t\tlargest = arr[i];\n\t\t}else if(largest < arr[i]){\n\t\t\treturn false;\t\t\t\n\t\t}\n\t}\n\treturn true;\n}\n\nint main(){\n\t\n\tint a[size], b[size], oldLargest = 999999999; \n\t\n\tfor(int i = 0; i < sizeof(a)/4; i++){ \n\t\tcout<< endl <<\"Enter a number\" << endl; \n\t\tcin >> a[i]; \n\t\t\n\t}\n\t\n\tint largest = a[0]; \n\t\n\tfor (int w = 0; w < sizeof(a)/4; w++){ \n\t\n\t\tfor(int i = 0; i < sizeof(a)/4; i++){ \n\t\t\t\n\t\t\tif((largest < a[i]) && (a[i] < oldLargest)){ \n\t\t\t\n\t\t\t\tlargest = a[i]; \n\t\t\t\n\t\t\t}\n\t\t} \n\t\t\n\t\tb[w] = oldLargest = largest; \n\t\tlargest = 0; \n\t} \n\n\tfor (int i = (sizeof(b)/4)-1; i >= 0; i--) {\n\t    cout << endl\n\t\t<< b[i];\n\n\t}\n\tif(isInAssending(b)){\n\t\tcout << endl << \"the array is in assending\";\n\t}else{\n\t\tcout << endl << \"the array is not in assending\";\n\t}\n\treturn 0;\n}"
+}]

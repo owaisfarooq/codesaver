@@ -97,24 +97,23 @@ function getData() {
 
 }
 
-function openToast(message, id) {
+function openToast(message, id, color) {
   let index = getIndexById(id);
-  cardHeading = data[index].activityNo;
+  const cardHeading = "Chapter: " + data[index].chapter;
   const subHeading = document.getElementById('cardHeading');
   const bodyOfToast = document.getElementById('toast-body');
+  const header = document.getElementById('header');
+  header.style.backgroundColor = color;
   bodyOfToast.innerHTML = message;
   subHeading.innerHTML = cardHeading;
-  const toastBlueprint = document.getElementById('liveToast');
-  const toast = new bootstrap.Toast(toastBlueprint);
+  const toastLiveExample = document.getElementById('liveToast');
+  const toast = new bootstrap.Toast(toastLiveExample);
   toast.show();
-
 }
+
 function populateHeader() {
   var smallHeader = document.getElementById('total-items');
-  var noOfCards = data.length;
-  console.log(data.length);
-  smallHeader.innerHTML += noOfCards;
-
+  smallHeader.innerHTML = "Total Items: " + data.length;
 }
 
 function filterByChapter(chapterNo) {
@@ -127,19 +126,28 @@ function filterByChapter(chapterNo) {
 }
 
 function deleteCard(id) {
-  fetch(url + 'delete/?cardId=' + id, {
+  fetch(url + 'delete/?type=activities&id=' + id, {
     headers: getheaders(),
     method: 'DELETE'
-  });
-  card = document.getElementById('cardId' + id);
-  card.style.display = 'none';
-  openToast("Deleted card ", id, "red");
+  }).then ( response => {
+    if (response.status == 200 ) {
+      card = document.getElementById('cardId' + id);
+      card.style.display = 'none';
+      openToast("Deleted card ", id, "green");
+    } else if ( response.status == 401 ) {
+      openToast("Only the author can delete their own card", id, "red");
+    } else {
+      openToast("An error occoured", id, "red");
+    }
+  }).catch ( error => {
+    console.log(error);
+  })
   getData();
 }
 
 function makeCards() {
   const mainBody = document.getElementById("main-body");
-
+  mainBody.innerHTML = '';
   rowCount = 0;
   populateHeader();
   if (filter) {

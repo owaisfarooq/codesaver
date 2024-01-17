@@ -18,10 +18,10 @@ let activities = [];
 let users = [];
 
 readDataFromFile();
-// readActivitiesFromFile();
 
-function getuserFromUserId ( id ) {
-  return users.find( user => user.userId == id );
+function getUserFromUserId ( id ) {
+  const userFound = users.find( user => user.userId == id );
+  return userFound;
 }
 
 async function saveToken(token, tokenLife, userId) {
@@ -39,7 +39,7 @@ async function saveToken(token, tokenLife, userId) {
       fs.writeFile(__dirname + '/api/token.json', json, 'utf8', err => {
         if (err) {
           reject(Error("error: " + err));
-          return console.log(err);
+          return console.error(err);
         }
       });
     }
@@ -62,382 +62,254 @@ async function isTokenPresent( token, tokenLife, userId ) {
   })
 }
 
-var deleteCode = function(id, type) {
-  return new Promise(function(resolve, reject) {
-    if (type == 'codes') {
-      fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-        if (err) {
-          reject(Error("error : " + err));
-        } else {
-          obj = JSON.parse(data);
-          for (let i = 0; i < obj.length; i++) {
-            if (id == obj[i].id) {
-              obj.splice(i, 1);
-            }
-          }
-          json = JSON.stringify(obj);
-          fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-            if (err) {
-              reject(Error("error: " + err));
-              return console.log(err);
-            }
-          });
-        }
-      });
-      resolve("success");
-    } else if (type == 'activities') {
-      fs.readFile(__dirname + '/api/activities.json', 'utf8', function readFileCallback(err, data) {
-        if (err) {
-          reject(Error("error : " + err));
-        } else {
+var deleteCode = function ( req, res, next ) {
+  const id = req.query.id || req.body.id;
+  const type = req.query.type || req.body.type;
+  const filePath = __dirname + '/api/' + type + '.json';
 
-          obj = JSON.parse(data);
-          for (let i = 0; i < obj.length; i++) {
-            if (id == obj[i].id) {
-              obj.splice(i, 1);
-            }
+  if ( !id ) {
+    return res.status(401).send("id is required");
+  }
+  if ( !type ) {
+    return res.status(400).send("type is required");
+  }
+
+  fs.readFile(filePath, 'utf8', function readFileCallback(err, data) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    } else {
+      let obj = JSON.parse(data);
+      let idFound = false;
+      for (let i = 0; i < obj.length; i++) {
+        if (id == obj[i].id) {
+          if ( obj[i].userId != req.user.userId ) {
+            return res.status(401).send("Unauthorized access")
           }
-          json = JSON.stringify(obj);
-          fs.writeFile(__dirname + '/api/activities.json', json, 'utf8', err => {
-            if (err) {
-              reject(Error("error: " + err));
-              return console.log(err);
-            }
-          });
+          idFound = true;
+          obj.splice(i, 1);
         }
+      }
+      if ( !idFound ) {
+        return res.status(400).send("id not found");
+      }
+      let json = JSON.stringify(obj);
+      fs.writeFile( filePath, json, 'utf8', ( err ) => {
+        if (err) {
+          reject(Error("error: " + err));
+          console.error(err);
+          return res.sendStatus(500);;
+        }
+        res.sendStatus(200);
       });
-      resolve("success");
     }
   });
 }
-
-// function deleteCode(id) {
-
-//   fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-
-//       obj = JSON.parse(data);
-//       for (let i = 0; i < obj.length; i++) {
-//         if (id == obj[i].id) {
-//           obj.splice(i, 1);
-//         }
-//       }
-//       json = JSON.stringify(obj);
-//       fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-//         if (err) {
-//           return console.log(err);
-//         }
-//       });
-//     }
-//   });
-// }
 
 async function readDataFromFile() {
-  fs.readFile(__dirname + '/api/codes.json', 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    }
-    codes = JSON.parse(data);
-    codes.forEach( code => {
-      code.author = getuserFromUserId(code.userId) && getuserFromUserId(code.userId).username
+  try {
+    const codesData = await readFileAsync(__dirname + '/api/codes.json');
+    const usersData = await readFileAsync(__dirname + '/api/users.json');
+    const activitiesData = await readFileAsync(__dirname + '/api/activities.json');
 
-    })
-  });
-  fs.readFile(__dirname + '/api/users.json', 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    }
-    users = JSON.parse(data);
-  });
-  fs.readFile(__dirname + '/api/activities.json', 'utf8', function(err, data) {
-    if (err) {
-      console.log(err);
-    }
-    // console.log("activities" + activities);
-    activities = JSON.parse(data);
-    activities.forEach( activity => {
-      activity.author = getuserFromUserId(activity.userId).username
-    })
+    codes = JSON.parse( codesData );
+    users = JSON.parse( usersData );
+    activities = JSON.parse( activitiesData );
+
+    codes.forEach( ( code ) => {
+      const user = getUserFromUserId(code.userId);
+      code.author = user && user.username;
+    });
+
+    activities.forEach( ( activity ) => {
+      const user = getUserFromUserId(activity.userId);
+      activity.author = user && user.username;
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function readFileAsync(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
   });
 }
 
-// async function readActivitiesFromFile() {
-//   // console.log("readActivitiesFromFile called");
-//   fs.readFile(__dirname + '/api/activities.json', 'utf8', function(err, data) {
-//     if (err) {
-//       console.log(err);
-//     }
-//     // console.log("activities" + activities);
-//     activities = JSON.parse(data);
-//   });
-// }
-
-// function writeDataToFile(dataToUpdate, isNew) {
-//   if (isNew == true) {
-//     fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-//       if (err) {
-//         console.log(err);
-//       } else {
-
-//         // dataToUpdate.id = a;
-//         // console.log("obj: " + data);
-//         let obj = JSON.parse(data);
-//         // let newIdValidated = false;
-//         let testId = 0;
-//         // let index = 0;
-
-//         //obj.sort((a, b) => a.id-b.id).obj[obj.length-1].id+1;
-
-//         let foundExisting;
-//         do {
-//           //let foundExisting = false;
-//           // console.log("testing Id: " + testId);
-//           // for (index = 0; index < obj.length; index++) {
-//           //   if (obj[index].id == testId) {
-//           //     console.log(`test Id already exists at obj[${index}].id: ` + obj[index].id);
-//           //     foundExisting = true;
-//           //     break;
-//           //   }
-//           // }
-
-//           foundExisting = obj.find(x => {
-//             return x.id == testId;
-//           });
-//           if (foundExisting) {
-//             testId++;
-//           }
-
-//         } while (foundExisting)
-
-//         dataToUpdate.id = testId;
-//         // console.log(`id assigned is = ${testId}`);
-//         obj.push(dataToUpdate);
-//         json = JSON.stringify(obj);
-//         fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-//           if (err) {
-//             return console.log(err);
-//           }
-//         });
-//       }
-//     });
-
-//   } else if (isNew == false) {
-
-//     fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         const indexToUpdate = getIndexByIdOfCodes(dataToUpdate.id);
-//         obj = JSON.parse(data);
-
-//         objIndex = obj.findIndex((obj => obj.id == indexToUpdate));
-//         obj[objIndex] = dataToUpdate;
-
-//         json = JSON.stringify(obj);
-//         fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-//           if (err) {
-//             return console.log(err);
-//           }
-//         });
-//       }
-//     });
-//   }
-//   readDataFromFile();
-// }
-
-function writeCodesToFile(dataToUpdate, isNew) {
-  if (isNew == 'true') {
-    fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-      if (err) {
-        console.log(err);
-      } else {
-
-        // dataToUpdate.id = a;
-        // console.log("obj: " + data);
-        let obj = JSON.parse(data);
-        // let newIdValidated = false;
-        let testId = 0;
-        // let index = 0;
-
-        //obj.sort((a, b) => a.id-b.id).obj[obj.length-1].id+1;
-
-        let foundExisting;
-        do {
-          foundExisting = obj.find(x => {
-            return x.id == testId;
-          });
-          if (foundExisting) {
-            testId++;
-          }
-
-        } while (foundExisting)
-
-        dataToUpdate.id = testId;
-        dataToUpdate.userId = req.user.userId
-        // console.log(`id assigned is = ${testId}`);
-        obj.push(dataToUpdate);
-        json = JSON.stringify(obj);
-        fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-          if (err) {
-            return console.log(err);
-          }
-        });
-      }
-    });
-
-  } else if (isNew == 'false') {
-
-    fs.readFile(__dirname + '/api/codes.json', 'utf8', function readFileCallback(err, data) {
-      if (err) {
-        console.log(err);
-      } else {
-        const indexToUpdate = getIndexByIdOfCodes(dataToUpdate.id);
-        obj = JSON.parse(data); //now it an object
-        objIndex = obj.findIndex((obj => obj.id == indexToUpdate));
-        obj[objIndex] = dataToUpdate;
-        json = JSON.stringify(obj); //convert it back to json
-        fs.writeFile(__dirname + '/api/codes.json', json, 'utf8', err => {
-          if (err) {
-            return console.log(err);
-          }
-        });
-      }
-    });
-  }
-  readDataFromFile();
-}
-function writeActivityToFile(dataToUpdate, isNew) {
-  if (isNew == 'true') {
-    fs.readFile(__dirname + '/api/activities.json', 'utf8', function readFileCallback(err, data) {
-      if (err) {
-        console.log(err);
-      } else {
-
-        // dataToUpdate.id = a;
-        // console.log("obj: " + data);
-        let obj = JSON.parse(data);
-        // let newIdValidated = false;
-        let testId = 0;
-        // let index = 0;
-
-        //obj.sort((a, b) => a.id-b.id).obj[obj.length-1].id+1;
-
-        let foundExisting;
-        do {
-          //let foundExisting = false;
-          // console.log("testing Id: " + testId);
-          // for (index = 0; index < obj.length; index++) {
-          //   if (obj[index].id == testId) {
-          //     console.log(`test Id already exists at obj[${index}].id: ` + obj[index].id);
-          //     foundExisting = true;
-          //     break;
-          //   }
-          // }
-
-          foundExisting = obj.find(x => {
-            return x.id == testId;
-          });
-          if (foundExisting) {
-            testId++;
-          }
-
-        } while (foundExisting)
-        dataToUpdate.id = testId;
-        dataToUpdate.userId = req.user.userId
-        obj.push(dataToUpdate);
-        json = JSON.stringify(obj);
-        fs.writeFile(__dirname + '/api/activities.json', json, 'utf8', err => {
-          if (err) {
-            return console.log(err);
-          }
-        });
-      }
-    });
-
-  }
-  else if (isNew == 'false') {
-    fs.readFile(__dirname + '/api/activities.json', 'utf8', function readFileCallback(err, data) {
-      if (err) {
-        console.log(err);
-      } else {
-        const indexToUpdate = getIndexByIdOfActivities(dataToUpdate.id);
+function writeToFile( req, res, fileName ) {
+  dataToUpdate = req.body;
+  dataToUpdate.addTime = new Date();
+  const filePath = __dirname + '/api/' + fileName + '.json';
+  let obj = {};
+  fs.readFile(filePath, 'utf8', function readFileCallback(err, data) {
+    if (err) {
+      console.error(err);
+      return res.sendStatus(500);
+    } else {
+      if ( !req.body.id ) {
         obj = JSON.parse(data);
+        let testId = 0;
 
-        objIndex = obj.findIndex((obj => obj.id == indexToUpdate));
-        obj[objIndex] = dataToUpdate;
-        json = JSON.stringify(obj);
-        fs.writeFile(__dirname + '/api/activities.json', json, 'utf8', err => {
-          if (err) {
-            return console.log(err);
+        let foundExisting;
+        do {
+          foundExisting = obj.find(x => {
+            return x.id == testId;
+          });
+          if (foundExisting) {
+            testId++;
           }
+        } while (foundExisting);
+
+        dataToUpdate.id = testId;
+        dataToUpdate.userId = req.user.userId
+        obj.push(dataToUpdate);
+      } else {
+        const indexToUpdate = activities.findIndex( ( data ) => {
+          data.id == dataToUpdate.id
         });
+        if ( indexToUpdate == -1 ) {
+          return res.status(400).send("Id Not Found");
+        }
+
+        obj = JSON.parse(data);
+        objIndex = obj.findIndex((obj => obj.id == indexToUpdate));
+        if ( !objIndex ) {
+          return res.status(400).send("Id Not Found");
+        }
+        obj[objIndex] = dataToUpdate;
+        dataToUpdate.userId = req.user.userId
       }
-    });
-  }
+      let json = JSON.stringify(obj);
+      fs.writeFile(filePath, json, 'utf8', err => {
+        if (err) {
+          console.error(err);
+          return res.sendStatus(500);
+        }
+      });
+      res.sendStatus(200);
+    }
+  });
   readDataFromFile();
-}
-
-function getIndexByIdOfActivities(id) {
-  for (let index = 0; index < activities.length; index++) {
-    if (index == id) {
-      return index;
-    }
-
-  }
-}
-
-function getIndexByIdOfCodes(id) {
-  for (let index = 0; index < codes.length; index++) {
-    if (index == id) {
-      return index;
-    }
-
-  }
 }
 
 let allowedUrls = [
   '/',
   '/login/',
+  '/register/',
   'view',
   '/lab-activities/',
   '/loading/',
   '/codes/',
   '/activities/'
 ]
-function log ( req ) {
-  fs.readFile(__dirname + '/api/logs.json', 'utf8', function readFileCallback(err, data) {
-    if (err) {
-      reject(Error("error : " + err));
-    } else {
-      obj = JSON.parse(data);
-      const flattenedReq = flatted.stringify(req);
-      obj.push(flattenedReq)
-      json = JSON.stringify(obj);
-      fs.writeFile(__dirname + '/api/logs.json', json, 'utf8', err => {
-        if (err) {
-          reject(Error("error: " + err));
-          return console.log(err);
-        }
-      });
+
+function readLogsFromFile() {
+  const filePath = __dirname + '/api/logs.json';
+
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+
+    if (!data.trim()) {
+      // File is empty
+      return [];
     }
-  })
+
+    const logs = JSON.parse(data);
+    return Array.isArray(logs) ? logs : [];
+  } catch (error) {
+    console.error('Error reading logs file:', error);
+    return [];
+  }
 }
-app.use( async function ( req, res, next ) {
+
+
+function writeLogsToFile(logs) {
+  const filePath = __dirname + '/api/logs.json';
+  const json = JSON.stringify(logs);
+
+  fs.writeFile(filePath, json, 'utf8', (err) => {
+    if (err) {
+      console.error('Error writing to logs file:', err);
+    }
+  });
+}
+
+function validatePassword(password) {
+  return new Promise ( (resolve, reject ) => {
+    if (password.length < 8) {
+      return reject ("password must be at least 8 characters");
+    }
+
+    let hasUpperCase = false;
+    let hasSpecialChar = false;
+    let hasNumber = false;
   
-  log(req)
+    for (const char of password) {
+      if (char >= 'A' && char <= 'Z') {
+        hasUpperCase = true;
+      } else if ('!@#$%^&*()_-+=<>?/[]{}|'.includes(char)) {
+        hasSpecialChar = true;
+      } else if (char >= '0' && char <= '9') {
+        hasNumber = true;
+      }
+    }
+    if ( !hasUpperCase ) {
+      return reject ("password must contian an uppercase character");
+    }
+    if ( !hasSpecialChar ) {
+      return reject ("password must contian a special character");
+    }
+    if ( !hasNumber ) {
+      return reject ("password must contian a number");
+    }
+    resolve(true);
+  })
+} 
+
+function log(req) {
+  const logs = readLogsFromFile();
+
+  const logEntry = {
+    timestamp: new Date().toISOString(),
+    method: req.method,
+    path: req.path,
+    query: req.query,
+    body: req.body,
+    headers: req.headers,
+  };
+
+  if (req.user) {
+    logEntry.user = req.user;
+  }
+
+  logs.push(logEntry);
+  writeLogsToFile(logs);
+}
+
+app.use( async function ( req, res, next ) {
+  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log ( clientIp + ' connected' );
   if( allowedUrls.find ( x => x.toLocaleLowerCase() == req.path.toLocaleLowerCase() ) && req.method.toLowerCase() == 'GET'.toLowerCase() ) {
+      log(req)
       next();
     return;
   }
   if ( req.method.toLowerCase() == 'GET'.toLowerCase() ) {
+    log(req)
     next();
     return;
   }
 
   var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
   if(!token){
+    log(req)
     if(!allowedUrls.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
       res.sendStatus(403);
       return;
@@ -447,14 +319,15 @@ app.use( async function ( req, res, next ) {
     }
   }
   jwt.verify(token, config.secret, async function(err, decoded) {
-
     if (err) {
+      log(req)
       if(!allowedURLs.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
         return res.status(401).send("Failed to authenticate token");
       }else{
         next();
       }
     } else {
+      req.decoded = decoded;
       if( !decoded.userId ) {
         return res.status(401).send("Invalid token");
       }
@@ -466,8 +339,8 @@ app.use( async function ( req, res, next ) {
       if ( !isTokenPresent( token, decoded.tokenLife, decoded.userId ) ) {
         return res.status(401).send("Invalid token");
       }
-      req.user = getuserFromUserId(decoded.userId);
-      
+      req.user = getUserFromUserId(decoded.userId);
+      log(req)
       next();
     }
   });
@@ -476,17 +349,70 @@ app.use( async function ( req, res, next ) {
 app.get('/', (req, res) => {
   readDataFromFile();
   res.sendFile(__dirname + '/public/home/index.html');
-  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  console.log(clientIp);
+});
+
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/public/register/register.html');
+});
+
+app.post('/register/', async (req, res) => {
+  const requiredFields = ['username', 'email', 'password'];
+
+  for (const fieldName of requiredFields) {
+    const field = req.body[fieldName];
+    if (!field) {
+      return res.status(400).send(`${fieldName} is a required field`);
+    }
+  }
+
+  const { username, email, password } = req.body;
+
+  try {
+    await validatePassword(password);
+
+    await readDataFromFile();
+
+    for (const userFound of users) {
+      if (userFound.username === username) {
+        return res.status(400).send('Username already exists');
+      }
+      if (userFound.email === email) {
+        return res.status(400).send('Email already exists');
+      }
+    }
+
+    const filePath = __dirname + '/api/users.json';
+    let obj = JSON.parse(await fs.promises.readFile(filePath, 'utf8'));
+
+    let testId = 0;
+    let foundExisting;
+
+    do {
+      foundExisting = obj.find((x) => x.id === testId);
+      if (foundExisting) {
+        testId++;
+      }
+    } while (foundExisting);
+
+    const dataToUpdate = { ...req.body, id: testId };
+    obj.push(dataToUpdate);
+
+    await fs.promises.writeFile(filePath, JSON.stringify(obj), 'utf8');
+    res.sendStatus(200);
+  } catch (error) {
+    return res.status(400).json(error || 'Validation failed');
+  }
+  await readDataFromFile();
 });
 
 app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/public/login/login.html');
 });
+
 app.post('/login/', async (req, res) => {
   let username =  req.body.username;
   let password = req.body.password;
-  // console.log("username: " + username + "\npassword: " + password);
+  await readDataFromFile();
   for (let index = 0; index < users.length; index++) {
     const userFound = users[index];
     if (userFound.username == username && userFound.password == password) {
@@ -495,7 +421,7 @@ app.post('/login/', async (req, res) => {
         userId: userFound.userId
       };
 
-      let tokenLife = 86400*365*10; //*365*10; //10 years
+      let tokenLife = 86400; //86400; //1 day
 
       var token = jwt.sign(payload, config.secret, {
         expiresIn: tokenLife // expires in 24 hours
@@ -517,27 +443,8 @@ app.post('/login/', async (req, res) => {
   });
 });
 
-// app.post('/login', (req, res) => {
-//   let username = req.query.username;
-//   let password = req.query.password;
-//   for (let index = 0; index < users.length; index++) {
-//     const element = users[index];
-//     if (element.username == username && element.password == password) {
-//       res.send("approved");
-//     }    
-//   }
-//   res.send("declined");
-//   // res.sendFile(__dirname + '/public/login/login.html');
-// });
-
 app.get('/new', (req, res) => {
   res.sendFile(__dirname + '/public/new/new.html');
-  // let password = req.query.auth;
-  // if (password == "true") {
-  //   res.sendFile(__dirname + '/public/new/new.html');
-  // }else{
-  //   res.sendFile(__dirname + '/public/new/new.html');
-  // }
 });
 
 app.get('/view', (req, res) => {
@@ -545,8 +452,6 @@ app.get('/view', (req, res) => {
 });
 
 app.get('/lab-activities/', (req, res) => {
-  // console.log("lab-activities");
-  // console.log("req: " + req);
   readDataFromFile();
   res.sendFile(__dirname + '/public/school/labActivities.html');
 
@@ -561,85 +466,54 @@ app.get('/loading', (res) => {
 
 });
 
-app.get('/codes/:id', (req, res) => {
-  readDataFromFile()
-    .then(() => {
-      const code = codes.find(c => c.id === parseInt(req.params.id))
-      if (!code) {
-        res.status(404).send("Invalid id or the id was not found.");
-      }
-      const user = code && code.userId && getuserFromUserId(code.userId);
-      code.author = user && user.username;
-      res.send(code);
-    });
+app.get('/codes/:id', async (req, res) => {
+  await readDataFromFile();
+  const code = codes.find((c) => c.id === parseInt(req.params.id));
+  if (!code) {
+    res.status(404).send("Invalid id or the id was not found.");
+  }
+  const user = code && code.userId && getUserFromUserId(code.userId);
+  code.author = user && user.username;
+  res.send(code);
 });
 
-app.get('/codes', (req, res) => {
-  readDataFromFile()
-    .then(res.send(codes));
+app.get('/codes', async (req, res) => {
+  await readDataFromFile();
+  res.send(codes);
 });
 
-app.get('/activities/:id', (req, res) => {
-  // console.log("activities:id");
-  readDataFromFile()
-    .then(() => {
-      const activity = activities.find(c => c.id === parseInt(req.params.id))
-      if (!activity) {
-        res.status(404).send("Invalid id or the id was not found.");
-      }
-      res.send(activity);
-    });
+app.get('/activities/:id', async (req, res) => {
+  await readDataFromFile();
+  const activity = activities.find((c) => c.id === parseInt(req.params.id));
+  if (!activity) {
+    res.status(404).send("Invalid id or the id was not found.");
+  }
+  res.send(activity);
 });
 
-app.get('/activities/', (req, res) => {
-  readDataFromFile()
-    .then(res.send(activities));
+app.get('/activities/', async (req, res) => {
+  await readDataFromFile();
+  res.send(activities);
 });
 
 app.post('/save/', (req, res) => {
-  let isNew = req.query.new;
+  let isNew = req.query.new ? true : false;
   let type = req.query.type;
-  // console.log("type: " + type);  
 
-  if (type == "codes") {
-    writeCodesToFile(req.body, isNew);
+  if ( !req.user.userId ) {
+    return res.status(201).send("Unauthorized access");
   }
-  else if (type == "activities") {
-    writeActivityToFile(req.body, isNew);
-  }
-  res.sendStatus(200);
-  // console.log("save req called with req: " + JSON.stringify(req.body));
+
+  writeToFile(req, res, type)
 });
 
-// app.post('/save/', urlencodedParser, function (req, res) {  
-
-//   response = {  
-//       first_name:req.body.first_name,  
-//       last_name:req.body.last_name  
-//   };  
-//   console.log(response);  
-//   res.end(JSON.stringify(response));  
-// })  
-
-
-// app.get('/delete/:id', (req, res) => {
-//   res.send(200);
-//   console.log(req + req.params.id);
-
-// });
-app.delete('/delete/', (req, res) => {
-  type = req.query.type;
-
-  deleteCode(req.query.id, type)
-    .then(function(result) {
-      if (result == "success") {
-
-        res.sendStatus(200);
-      } else {
-        res.sendStatus(500);
-      }
-    });
-
+app.delete('/delete/', async ( req, res, next ) => {
+  // const id = req.query.id;
+  // const type = req.query.type;
+  if ( !req.user.userId ) {
+    return res.status(401).send("Unauthorized access");
+  }
+  deleteCode( req, res, next );
   readDataFromFile();
 });
 app.use((req, res) => {

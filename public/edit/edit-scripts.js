@@ -39,17 +39,6 @@ function copyToClipboard() {
   openToast("Copied to clipboard", id);
 }
 
-// var deleteCode = function(id) {
-//   return new Promise(function(resolve, reject) {
-//     fetch(url + 'delete/?id=' + id, {
-//       method: 'DELETE'
-//     }).then(() => {
-
-//     })
-//     reject(Error("error: " + err));
-//     resolve("success");
-//   });
-// };
 var deleteData = function() {
   return new Promise(function(resolve, reject) {
     fetch(url + 'delete/?id=' + id + '&type=' + type, {

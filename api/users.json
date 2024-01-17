@@ -1,12 +1,19 @@
-[
-    {
-        "userId": 1,
-        "username":"owais",
-        "password":"superuser"
-    },
-    {
-        "userId": 2,
-        "username":"rae",
-        "password":"iamcrazy"
-    }
-]
+[{
+    "userId": 1,
+    "username": "owais",
+    "password": "superuser"
+}, {
+    "userId": 2,
+    "username": "rae",
+    "password": "iamcrazy"
+}, {
+    "email": "asd@asd.com",
+    "username": "OwaisExpert",
+    "password": "OwaisExpert@1298",
+    "userId": 3
+}, {
+    "email": "WE@2ead.com",
+    "username": "AD",
+    "password": "daiowdo:@EY@*3u894y23894yqiRY#*(QPr3r",
+    "id": 0
+}]

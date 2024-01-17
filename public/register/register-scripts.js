@@ -12,38 +12,26 @@ function openToast(heading, message, color) {
     toast.show();
 }
 
+
 async function submit() {
   const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  
+
   try {
-    const res = await fetch(url + 'login/', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
+    const response = await axios.post(url + 'register/', {
+      email: email,
+      username: username,
+      password: password
     });
-    
-    if (res.ok) {
-      const data = await res.json();
-      localStorage.setItem('token', data.token);
-      openToast("Login successfull", "valid credentials", 'green')
-      window.location.replace(oldPage || url);
-    } else {
-      console.log('Login failed');
-      res.json()
-      .then( ( data ) => {
-        openToast("Login failed", data, 'red')
-      });
-    }
+
+    // Assuming the server returns a success message or data in the response
+    console.log(response.data);
+    openToast("Success", response.data, "green");
+    // Registration successful logic here
   } catch (error) {
-    openToast("Login failed", error, 'red')
-    console.error('Error:', error);
+    // Handle errors
+    openToast("Error", error.response.data, "red");
+    console.log(error);
   }
-  
 }

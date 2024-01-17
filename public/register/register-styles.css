@@ -12,7 +12,7 @@ body {
     width: 100%;
 }
 
-.login-form {
+.register-form {
   background: #fff;
   width: 500px;
   margin: 65px auto;
@@ -24,18 +24,18 @@ body {
   border-radius: 4px;
   box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
 }
-.login-form h1 {
+.register-form h1 {
   padding: 35px 35px 0 35px;
   font-weight: 300;
 }
-.login-form .content {
+.register-form .content {
   padding: 35px;
   text-align: center;
 }
-.login-form .input-field {
+.register-form .input-field {
   padding: 12px 5px;
 }
-.login-form .input-field input {
+.register-form .input-field input {
   font-size: 16px;
   display: block;
   font-family: 'Rubik', sans-serif;
@@ -47,25 +47,25 @@ body {
   -webkit-transition: all .2s;
   transition: all .2s;
 }
-.login-form .input-field input::-webkit-input-placeholder {
+.register-form .input-field input::-webkit-input-placeholder {
   text-transform: uppercase;
 }
-.login-form .input-field input::-moz-placeholder {
+.register-form .input-field input::-moz-placeholder {
   text-transform: uppercase;
 }
-.login-form .input-field input:-ms-input-placeholder {
+.register-form .input-field input:-ms-input-placeholder {
   text-transform: uppercase;
 }
-.login-form .input-field input::-ms-input-placeholder {
+.register-form .input-field input::-ms-input-placeholder {
   text-transform: uppercase;
 }
-.login-form .input-field input::placeholder {
+.register-form .input-field input::placeholder {
   text-transform: uppercase;
 }
-.login-form .input-field input:focus {
+.register-form .input-field input:focus {
   border-color: #0D6EFD;
 }
-.login-form a.link {
+.register-form a.link {
   text-decoration: none;
   color: #747474;
   letter-spacing: 0.2px;
@@ -73,14 +73,14 @@ body {
   display: inline-block;
   margin-top: 20px;
 }
-.login-form .action {
+.register-form .action {
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   flex-direction: row;
 }
-.login-form .action button {
+.register-form .action button {
   width: 100%;
   border: none;
   padding: 18px;
@@ -96,15 +96,15 @@ body {
   -webkit-transition: all .3s;
   transition: all .3s;
 }
-.login-form .action button:hover {
+.register-form .action button:hover {
   background: #d8d8d8;
 }
-.login-form .action button:nth-child(1) {
+.register-form .action button:nth-child(1) {
   background: #0D6EFD;
   color: #fff;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 4px;
 }
-.login-form .action button:nth-child(1):hover {
+.register-form .action button:nth-child(1):hover {
   background: #3c4d6d;
 }

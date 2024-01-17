@@ -51,9 +51,7 @@ if (auth) {
     </div>
   </div>
   `;
-
 }
-
 
 var data;
 getData();
@@ -67,47 +65,33 @@ function copyToClipboard(id) {
 }
 
 function deleteCard(id) {
-  fetch(url + 'delete/?cardId=' + id, {
+  fetch(url + 'delete/?type=codes&id=' + id, {
     headers: getheaders(),
     method: 'DELETE'
-  });
-  card = document.getElementById('cardId' + id);
-  card.style.display = 'none';
-  openToast("Deleted card ", id, "red");
+  }).then ( response => {
+    if (response.status == 200 ) {
+      card = document.getElementById('cardId' + id);
+      card.style.display = 'none';
+      openToast("Deleted card ", id, "green");
+    } else if ( response.status == 401 ) {
+      openToast("Only the author can delete their own card", id, "red");
+    } else {
+      openToast("An error occoured", id, "red");
+    }
+  }).catch ( error => {
+    console.log(error);
+  })
   getData();
 }
 
-// function editCard(id) {
-
-//   fetch(url + 'edit?id=' + id, {
-//     method: 'GET'
-//   });
-
-//   openToast("Deleted card ", id);
-
-// }
-
 function getIndexById(Id) {
-
   for (let a = 0; a < data.length; a++) {
-
     if (data[a].id == Id) {
-
       return a;
-
     }
-
   }
 }
-// var animation = bodymovin.loadAnimation({
-//   // animationData: { /* ... */ },
-//   container: document.getElementById('icon-container'), // required
-//   path: 'loading', // required
-//   renderer: 'svg', // required
-//   loop: true, // optional
-//   autoplay: true, // optional
-//   name: "Demo Animation", // optional
-// });
+
 function getData() {
   fetch(url + 'codes/', {
     headers: getheaders()
@@ -116,7 +100,6 @@ function getData() {
     .then(json => data = json)
     .then(() => this.makeCards());
 }
-
 
 function openToast(message, id, color) {
   let index = getIndexById(id);
@@ -134,8 +117,8 @@ function openToast(message, id, color) {
 
 function populateHeader() {
   var smallHeader = document.getElementById('total-items');
-  var noOfCards = data.length;
-  smallHeader.innerHTML += noOfCards;
+  smallHeader.innerHTML = "Total Items: " + data.length;
+  // smallHeader.innerHTML = Number(data.length);
 }
 
 function GetSortOrder(prop) {
@@ -152,7 +135,7 @@ function GetSortOrder(prop) {
 function makeCards() {
   populateHeader();
   const mainBody = document.getElementById("main-body");
-
+  mainBody.innerHTML = '';
   rowCount = 0;
   if (sortBy) {
     data.sort(GetSortOrder(sortBy));
@@ -212,5 +195,5 @@ function makeCards() {
     rowCount++;
     mainBody.innerHTML += row;
   }
-  document.getElementById('loading').style.display = "none";
+  // document.getElementById('loading').style.display = "none";
 }

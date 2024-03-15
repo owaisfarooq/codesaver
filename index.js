@@ -321,7 +321,7 @@ app.use( async function ( req, res, next ) {
   jwt.verify(token, config.secret, async function(err, decoded) {
     if (err) {
       log(req)
-      if(!allowedURLs.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
+      if(!allowedUrls.find(x=> x.toLocaleLowerCase() == req.path.toLocaleLowerCase())){
         return res.status(401).send("Failed to authenticate token");
       }else{
         next();

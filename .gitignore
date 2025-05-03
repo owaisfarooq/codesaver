@@ -1,3 +1,8 @@
+node_modules/
+.cache/replit
+.upm
+.config
+
 # Logs
 logs
 *.log

@@ -2,7 +2,6 @@ let url = window.location.hostname == "localhost" ? 'http://localhost:3001/' : '
 const params = new URLSearchParams(window.location.search);
 let id = params.get('id');
 let auth = localStorage.getItem('token');
-let type = params.get('type') || 'codes';
 var data;
 if (!auth) {
   window.location.replace(url + 'login/');
@@ -41,7 +40,7 @@ function copyToClipboard() {
 
 var deleteData = function() {
   return new Promise(function(resolve, reject) {
-    fetch(url + 'delete/?id=' + id + '&type=' + type, {
+    fetch(url + 'delete/?id=' + id, {
       headers: getheaders(),
       method: 'DELETE'
     })
@@ -60,11 +59,7 @@ async function deleteCard() {
       if (result == "success") {
         openToast("Deleted card", id, "#198754");
         setTimeout(() => {
-          if(type == 'codes'){
-            window.location.replace("/");
-          }else if(type == 'activities'){
-            window.location.replace("/lab-activities");
-          }
+          window.location.replace("/");
         }, 3000);
       } else {
         openToast("Failed to delete card", "#dc3545");
@@ -74,186 +69,95 @@ async function deleteCard() {
 }
 
 function saveCard() {
-  if (type == "codes") {
+  const titleToSend = document.getElementById('Title').value;
+  const authorToSend = document.getElementById('Author').value;
+  const LanguageToSend = document.getElementById('Language').value
+  const codeToSend = document.getElementById('code').value;
 
-    const titleToSend = document.getElementById('Title').value;
-    const authorToSend = document.getElementById('Author').value;
-    const LanguageToSend = document.getElementById('Language').value
-    const codeToSend = document.getElementById('code').value;
-
-    fetch(url + 'save/?id=' + id + '&type=' + type + '&new=false',
-      {
-        headers: getheaders (),
-        method: "POST",
-        body: JSON.stringify({
-          id: Number(id),
-          title: titleToSend,
-          language: LanguageToSend,
-          author: authorToSend,
-          code: codeToSend
-        })
-      }
-    )
-    .then(() => {
-      openToast("Saved card ", id);
-    });
-  } else if (type == "activities") {
-
-    const chapterToSend = document.getElementById('Chapter').value;
-    const activityNoToSend = document.getElementById('ActivityNo').value;
-    const authorToSend = document.getElementById('Author').value;
-    const codeToSend = document.getElementById('code').value;
-    
-    fetch(url + 'save/?id=' + id + '&type=' + type + '&new=false',{
+  fetch(url + 'save/?id=' + id + '&new=false',
+    {
       headers: getheaders (),
       method: "POST",
       body: JSON.stringify({
         id: Number(id),
-        chapter: Number(chapterToSend),
-        activityNo: Number(activityNoToSend),
+        title: titleToSend,
+        language: LanguageToSend,
         author: authorToSend,
         code: codeToSend
       })
-    })
-    .then(() => {
-      openToast("Saved card ", id);
-    });
-  }
+    }
+  )
+  .then(() => {
+    openToast("Saved card ", id);
+  });
 }
 
 
 function getData() {
-  if (type == "codes") {
-    fetch(url + 'codes/' + id, {
-      headers: getheaders ()
-    })
-      .then(res => res.json())
-      .then(json => data = json)
-      .then(() => this.makeCard())
-  } else if (type == "activities") {
-    fetch(url + "activities/" + id, {
-      headers: getheaders ()
-    })
-      .then(res => res.json())
-      .then(json => data = json)
-      .then(() => this.makeCard())
-  }
+  fetch(url + 'codes/' + id, {
+    headers: getheaders ()
+  })
+    .then(res => res.json())
+    .then(json => data = json)
+    .then(() => this.makeCard())
 }
 
 function openToast(message, id, color) {
-  // console.log("asd");
-  if (type == "codes") {
-    const cardHeading = document.getElementById('Title').value;
-    const subHeading = document.getElementById('cardHeading');
-    const bodyOfToast = document.getElementById('toast-body');
-    const header = document.getElementById('header');
-    header.style.backgroundColor = color;
-    bodyOfToast.innerHTML = message;
-    subHeading.innerHTML = cardHeading;
-    const toastLiveExample = document.getElementById('liveToast');
-    const toast = new bootstrap.Toast(toastLiveExample);
-    toast.show();
-  }
-  else if (type == "activities") {
-    const activityNo = document.getElementById('ActivityNo').value;
-    const subHeading = document.getElementById('cardHeading');
-    const bodyOfToast = document.getElementById('toast-body');
-    bodyOfToast.innerHTML = message;
-    subHeading.innerHTML = activityNo;
-    const toastLiveExample = document.getElementById('liveToast');
-    const toast = new bootstrap.Toast(toastLiveExample);
-    toast.show();
-
-  }
+  const cardHeading = document.getElementById('Title').value;
+  const subHeading = document.getElementById('cardHeading');
+  const bodyOfToast = document.getElementById('toast-body');
+  const header = document.getElementById('header');
+  header.style.backgroundColor = color;
+  bodyOfToast.innerHTML = message;
+  subHeading.innerHTML = cardHeading;
+  const toastLiveExample = document.getElementById('liveToast');
+  const toast = new bootstrap.Toast(toastLiveExample);
+  toast.show();
 }
 
 function makeCard() {
-  if (type == "codes") {
-    var mainBody = document.getElementById("main-body");
-    var card = `
-        <div>
-          <div class="card" id="card">
-            <div class="card-header d-flex justify-content-between">
-              <div class="align-left">
-                      
-                <label class="form-label">Title: </label>
-                <input class="form-control" id="Title" value="${data.title}">
-              
-              </div>
-              <div class="col-sm-3" style="display: inline-block;">
-                <label class="form-label">Language: </label>    
-                <select id="Language" class="form-select form-control" aria-label="Default select example">
-                    <option value="CPP">CPP</option>
-                    <option value="C">C</option>
-                    <option value="Python">Python</option>
-                    <option value="other">other</option>
-                </select>
-              </div>
-              <div class="align-right">
-                  
-                <label class="form-label">Author: </label>
-                <input class="form-control" id="Author" value="${data.author}">
-                  
-              </div>
-            </div>
+  var mainBody = document.getElementById("main-body");
+  var card = `
+      <div>
+        <div class="card" id="card">
+          <div class="card-header d-flex justify-content-between">
+            <div class="align-left">
+                    
+              <label class="form-label">Title: </label>
+              <input class="form-control" id="Title" value="${data.title}">
             
-            <div class="card-body">
-              <textarea id="code" class="card-text code-text">${data.code}</textarea>
-              <div class="align-right">
-                <a class="btn btn-primary" onclick="copyToClipboard()">Copy</a>
-                <a class="btn btn-success" onclick="saveCard()">save</a>
-                <a class="btn btn-danger" onclick="deleteCard(${data.id})">Delete</a>
-              </div>            
             </div>
+            <div class="col-sm-3" style="display: inline-block;">
+              <label class="form-label">Language: </label>    
+              <select id="Language" class="form-select form-control" aria-label="Default select example">
+                  <option value="CPP">CPP</option>
+                  <option value="C">C</option>
+                  <option value="Python">Python</option>
+                  <option value="other">other</option>
+              </select>
+            </div>
+            <div class="align-right">
+                
+              <label class="form-label">Author: </label>
+              <input class="form-control" id="Author" value="${data.author}">
+                
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <textarea id="code" class="card-text code-text">${data.code}</textarea>
+            <div class="align-right">
+              <a class="btn btn-primary" onclick="copyToClipboard()">Copy</a>
+              <a class="btn btn-success" onclick="saveCard()">save</a>
+              <a class="btn btn-danger" onclick="deleteCard(${data.id})">Delete</a>
+            </div>            
           </div>
         </div>
-      `;
+      </div>
+    `;
 
-    mainBody.innerHTML += card;
-    var e = document.getElementById("Language");
-    e.value = data.language;
+  mainBody.innerHTML += card;
+  var e = document.getElementById("Language");
+  e.value = data.language;
 
-  }
-  else if (type == "activities") {
-    var mainBody = document.getElementById("main-body");
-    var card = `
-          <div>
-            <div class="card" id="card">
-              <div class="card-header d-flex justify-content-between">
-                <div class="align-left">
-
-                  <label class="form-label">chapter: </label>
-                  <input class="form-control" id="Chapter" value="${data.chapter}">
-
-                </div>
-
-                <div class="align-left">
-
-                  <label class="form-label">activity: </label>
-                  <input class="form-control" id="ActivityNo" value="${data.activityNo}">
-
-                </div>
-
-                <div class="align-right ">
-
-                  <label class="form-label">Author: </label>
-                  <input class="form-control" id="Author" value="${data.author}">
-
-                </div>
-              </div>
-
-              <div class="card-body">
-                <textarea id="code" class="card-text code-text">${data.code}</textarea>
-                <div class="align-right">
-                  <a class="btn btn-primary" onclick="copyToClipboard()">Copy</a>
-                  <a class="btn btn-success" onclick="saveCard()">save</a>
-                  <a class="btn btn-danger" onclick="deleteCard(${data.id})">Delete</a>
-                </div>            
-              </div>
-            </div>
-          </div>
-      `;
-
-    mainBody.innerHTML += card;
-  }
 }

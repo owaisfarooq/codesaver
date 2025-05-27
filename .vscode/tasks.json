@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "tsc: build - tsconfig.json",
+      "type": "typescript",
+      "tsconfig": "tsconfig.json",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "copy-static-files",
+      "type": "shell",
+      "command": "npx cpx \"{src,api}/**/*.{json,txt}\" out && npx cpx \"public/**/*\" out/public",
+      "problemMatcher": []
+    },
+    {
+      "label": "build-and-copy",
+      "dependsOn": [
+        "tsc: build - tsconfig.json",
+        "copy-static-files"
+      ],
+      "dependsOrder": "sequence"
+    }
+  ]
+}

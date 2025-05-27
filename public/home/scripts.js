@@ -23,10 +23,7 @@ if (auth) {
         <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
           <a class="navbar-brand" id="total-items">Total Items: </a>
           <li class="nav-item" style="margin-left: auto;">
-            <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
-          </li>
-          <li class="nav-item" style="margin-left: auto;">
-            <a href="/new?type=codes" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
+            <a href="/new" class="btn btn-primary justify-content-end" style="margin-left: auto;">Add New</a>
           </li>
         </ul>
     </div>
@@ -41,9 +38,6 @@ if (auth) {
     <div class="collapse navbar-collapse" style="float: right;" id="navbarNav">
         <ul class="navbar-nav" id="HeaderButtons" style="margin-left: auto;">
           <a class="navbar-brand" id="total-items">Total Items: </a>
-          <li class="nav-item" style="margin-left: auto;">
-            <a href="/lab-activities/" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">Lab activities</a>
-          </li>
           <li class="nav-item" style="margin-left: auto;">
             <a href="/login/?oldPage=${currentUrl}" class="btn btn-light justify-content-end" style="margin-left: auto;margin-right: 5px;">login</a>
           </li>
@@ -65,7 +59,7 @@ function copyToClipboard(id) {
 }
 
 function deleteCard(id) {
-  fetch(url + 'delete/?type=codes&id=' + id, {
+  fetch(url + 'delete/?id=' + id, {
     headers: getheaders(),
     method: 'DELETE'
   }).then ( response => {
@@ -161,8 +155,8 @@ function makeCards() {
                     <h5 class="card-title">${data[i].author}</h5>
                     <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
                     <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}&type=codes">View</a>
-                    <a class="btn btn-success" href="${url}/edit?id=${data[i].id}&type=codes">Edit</a>
+                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}">View</a>
+                    <a class="btn btn-success" href="${url}/edit?id=${data[i].id}">Edit</a>
                     <a class="btn btn-danger" onclick="deleteCard(${data[i].id})">Delete</a>
                 </div>
             </div>
@@ -180,7 +174,7 @@ function makeCards() {
                     <h5 class="card-title">${data[i].author}</h5>
                     <textarea id="code${data[i].id}" class="card-text code-text">${data[i].title}</textarea>
                     <a class="btn btn-primary" onclick="copyToClipboard(${data[i].id})">copy</a>
-                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}&type=codes" >View</a>
+                    <a class="btn btn-secondary" href="${url}/view?id=${data[i].id}" >View</a>
                 </div>
             </div>
           </div>

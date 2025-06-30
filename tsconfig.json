@@ -2,8 +2,18 @@
   "compilerOptions": {
     "target": "ES5",
     "module": "CommonJS",
-    "outDir": "out",
-    "sourceMap": true
+    "outDir": "dist",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": ["./src/**/*", "./api/*", "./api/**/*", "./*index.*", "./public/*"],
+  "include": ["./src/**/*", "./api/*", "./api/**/*", "./*index.*", "./public/*", "./types/**/*"],
 }

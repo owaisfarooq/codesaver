@@ -21,9 +21,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/out/index.js", // <-- use compiled JS
+      "program": "${workspaceFolder}/dist/index.js", // <-- use compiled JS
       "preLaunchTask": "build-and-copy",
-      "outFiles": ["${workspaceFolder}/out/**/*.js"]
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
     }
   ]
 }

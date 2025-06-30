@@ -1,6 +1,6 @@
 export class Code {
     constructor(
-        public userid: number,
+        public codeid: number,
         public username: string,
         public email: string
     ) {}

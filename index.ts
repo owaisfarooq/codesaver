@@ -4,10 +4,10 @@ import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import jwt, { VerifyErrors } from 'jsonwebtoken';
 import { urlencoded, json } from 'body-parser';
-import { AppError, ErrorCode } from './src/AppError';
-import { User } from './src/User';
+import { User } from '@src/User';
 import dotenv from 'dotenv';
 import { Code } from '@src/Code';
+import { AppError, ErrorCode } from '@src/AppError';
 
 dotenv.config();
 const app = express();
